@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 
 interface Neuron {
@@ -26,16 +27,6 @@ const NeuralNetworkAnimation = () => {
     
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-    
-    // Set canvas to full window size
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initNetwork();
-    };
-    
-    window.addEventListener('resize', handleResize);
-    handleResize();
     
     // Animation variables
     let neurons: Neuron[] = [];
@@ -77,6 +68,16 @@ const NeuralNetworkAnimation = () => {
         }
       }
     }
+    
+    // Set canvas to full window size
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initNetwork();
+    };
+    
+    window.addEventListener('resize', handleResize);
+    handleResize();
     
     // Animation loop
     function animate() {
@@ -154,7 +155,7 @@ const NeuralNetworkAnimation = () => {
           neuron.x, neuron.y, neuron.size * 2
         );
         gradient.addColorStop(0, `hsla(${neuron.hue}, 80%, 60%, 0.3)`);
-        gradient.addColorStop(1, `hsla(${neuron.hue}, 80%, 60%, 0)`);
+        gradient.addColorStop(1, `hsla(${neuron.hue}, 80%, 60%, 0}`);
         ctx.fillStyle = gradient;
         ctx.fill();
       }
@@ -163,7 +164,6 @@ const NeuralNetworkAnimation = () => {
     }
     
     // Start animation
-    initNetwork();
     animate();
     
     // Cleanup on unmount
