@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, ArrowRight, Sparkles, GraduationCap, BarChart } from "lucide-react";
+import NeuralNetworkAnimation from '@/components/NeuralNetworkAnimation';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex flex-col">
+      <NeuralNetworkAnimation />
+      
       <header className="w-full py-4 px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
