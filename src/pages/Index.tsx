@@ -75,7 +75,7 @@ const Index = () => {
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
             <div
               className="folder-card card-purple cursor-pointer"
-              onClick={() => navigate('/learn-more')}
+              onClick={() => navigate('/alumni-employment-assistance')}
             >
               <div className="mb-8">
                 <span className="text-xs uppercase tracking-wider opacity-70">ALUMNI 21 PROGRAM</span>
@@ -86,7 +86,7 @@ const Index = () => {
 
             <div
               className="folder-card card-gray cursor-pointer"
-              onClick={() => navigate('/learn-more')}
+              onClick={() => navigate('/learning-platform')}
             >
               <div className="mb-8 flex justify-between">
                 <span className="text-xs uppercase tracking-wider opacity-70">LEARNING PLATFORM WALKTHROUGH</span>
