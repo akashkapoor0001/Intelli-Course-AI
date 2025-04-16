@@ -31,7 +31,7 @@ const Index = () => {
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4">
                 <button
-                  onClick={() => navigate('/dashboard')}
+                  onClick={() => navigate('/login')}
                   type="button"
                   className="btn-rounded w-full sm:w-auto text-left flex items-center justify-between"
                 >
