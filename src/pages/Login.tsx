@@ -1,13 +1,21 @@
 
 import { useEffect } from 'react';
+import { useUserCount } from '@/contexts/UserCountContext';
 import AuthForm from '@/components/AuthForm';
 import ModernNavbar from '@/components/ModernNavbar';
 import NeuralNetworkAnimation from '@/components/NeuralNetworkAnimation';
 
 const Login = () => {
+  const { incrementUserCount } = useUserCount();
+  
   useEffect(() => {
     document.title = "Login | CourseCompass";
   }, []);
+
+  // Increment user count when someone completes login
+  const handleLogin = () => {
+    incrementUserCount();
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative">

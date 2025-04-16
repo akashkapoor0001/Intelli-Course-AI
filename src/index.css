@@ -100,6 +100,15 @@
   .btn-rounded {
     @apply flex items-center justify-center gap-2 rounded-full border border-white/10 px-8 py-3 font-medium bg-white/5 hover:bg-white/10 transition-all;
   }
+  
+  .folder-card {
+    @apply rounded-t-xl rounded-r-xl rounded-bl-xl rounded-br-sm p-8 relative overflow-hidden transition-all duration-300 hover:shadow-lg;
+  }
+  
+  .folder-card::after {
+    @apply content-[''] absolute bottom-0 right-0 w-6 h-6 bg-background;
+    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+  }
 }
 
 @keyframes float {
@@ -118,6 +127,15 @@
 
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out forwards;
 }
 
 @keyframes logo-spin {

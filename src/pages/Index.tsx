@@ -1,12 +1,14 @@
 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, GraduationCap, Zap, Users, BookOpen } from "lucide-react";
+import { ArrowRight, GraduationCap, Zap, Users, BookOpen, Folder } from "lucide-react";
+import { useUserCount } from '@/contexts/UserCountContext';
 import NeuralNetworkAnimation from '@/components/NeuralNetworkAnimation';
 import ModernNavbar from '@/components/ModernNavbar';
 
 const Index = () => {
   const navigate = useNavigate();
+  const { userCount } = useUserCount();
   
   useEffect(() => {
     document.title = "CourseCompass | AI-Powered Course Recommendations";
@@ -22,24 +24,6 @@ const Index = () => {
         <section className="px-6 pb-20">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <div className="flex items-center gap-2">
-                <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20">
-                  <img src="/lovable-uploads/c9001d2d-ad20-4f2d-a82a-f8b8bdc88b93.png" 
-                       alt="Student avatar" 
-                       className="w-full h-full object-cover" />
-                </div>
-                <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20 -ml-4">
-                  <img src="/lovable-uploads/c9001d2d-ad20-4f2d-a82a-f8b8bdc88b93.png" 
-                       alt="Student avatar" 
-                       className="w-full h-full object-cover" />
-                </div>
-                <div className="w-12 h-12 rounded-full overflow-hidden border border-white/20 -ml-4">
-                  <img src="/lovable-uploads/c9001d2d-ad20-4f2d-a82a-f8b8bdc88b93.png" 
-                       alt="Student avatar" 
-                       className="w-full h-full object-cover" />
-                </div>
-              </div>
-              
               <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
                 DIVE INTO<br />
                 THE DIGITAL<br />
@@ -50,11 +34,11 @@ const Index = () => {
                 <form className="flex items-center max-w-lg">
                   <div className="relative flex-1">
                     <button 
-                      onClick={() => navigate('/login')}
+                      onClick={() => navigate('/learn-more')}
                       type="button"
                       className="btn-rounded w-full text-left"
                     >
-                      Book Demo Call
+                      Explore Courses
                       <ArrowRight className="ml-auto h-5 w-5" />
                     </button>
                   </div>
@@ -71,7 +55,7 @@ const Index = () => {
             
             <div className="relative animate-fade-in glass-card overflow-hidden" style={{ animationDelay: "0.4s" }}>
               <img 
-                src="/lovable-uploads/c9001d2d-ad20-4f2d-a82a-f8b8bdc88b93.png" 
+                src="/lovable-uploads/2f36433c-568b-4f51-bf02-8c7a447545d9.png" 
                 alt="Student learning"
                 className="w-full h-auto object-cover rounded-3xl"
               />
@@ -93,15 +77,23 @@ const Index = () => {
         {/* Feature Cards */}
         <section className="px-6 py-12">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="card-purple rounded-3xl p-8 animate-fade-in" style={{ animationDelay: "0.8s" }}>
+            <div 
+              className="folder-card card-purple animate-fade-in cursor-pointer" 
+              style={{ animationDelay: "0.8s" }}
+              onClick={() => navigate('/learn-more')}
+            >
               <div className="mb-8">
                 <span className="text-xs uppercase tracking-wider opacity-70">ALUMNI 21 PROGRAM</span>
               </div>
               <h3 className="text-2xl font-bold mb-4">EMPLOYMENT ASSISTANCE</h3>
-              <span className="text-6xl">*</span>
+              <Folder className="text-white/30 h-12 w-12 absolute bottom-4 right-4" />
             </div>
             
-            <div className="card-gray rounded-3xl p-8 animate-fade-in" style={{ animationDelay: "1s" }}>
+            <div 
+              className="folder-card card-gray animate-fade-in cursor-pointer" 
+              style={{ animationDelay: "1s" }}
+              onClick={() => navigate('/learn-more')}
+            >
               <div className="mb-8 flex justify-between">
                 <span className="text-xs uppercase tracking-wider opacity-70">LEARNING PLATFORM WALKTHROUGH</span>
                 <ArrowRight className="h-5 w-5" />
@@ -109,14 +101,16 @@ const Index = () => {
               <div className="w-20 h-20">
                 <GraduationCap className="w-full h-full" />
               </div>
+              <Folder className="text-white/30 h-12 w-12 absolute bottom-4 right-4" />
             </div>
             
-            <div className="card-yellow rounded-3xl p-8 animate-fade-in" style={{ animationDelay: "1.2s" }}>
+            <div className="folder-card card-yellow animate-fade-in" style={{ animationDelay: "1.2s" }}>
               <div className="mb-8 flex justify-between">
-                <span className="text-xs uppercase tracking-wider opacity-70">LEARNING PLATFORM WALKTHROUGH</span>
-                <ArrowRight className="h-5 w-5" />
+                <span className="text-xs uppercase tracking-wider opacity-70">USERS ENROLLED</span>
+                <Users className="h-5 w-5" />
               </div>
-              <span className="text-6xl font-bold">700</span>
+              <span className="text-6xl font-bold">{userCount}</span>
+              <Folder className="text-black/30 h-12 w-12 absolute bottom-4 right-4" />
             </div>
           </div>
         </section>
@@ -181,6 +175,13 @@ const Index = () => {
                 <h3 className="text-xl font-semibold text-white">Join our community</h3>
                 <p className="text-white/70">Connect with peers and mentors to enhance your learning experience</p>
               </div>
+            </div>
+            
+            <div className="mt-16 text-center">
+              <blockquote className="text-2xl italic text-white/90 max-w-3xl mx-auto mb-6">
+                "Education is the passport to the future, for tomorrow belongs to those who prepare for it today."
+              </blockquote>
+              <p className="text-muted-foreground">— Malcolm X</p>
             </div>
           </div>
         </section>
