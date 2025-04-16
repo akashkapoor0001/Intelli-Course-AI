@@ -1,8 +1,7 @@
-
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Clock, BookOpen, Star } from "lucide-react";
+import { ExternalLink, Clock, BookOpen, Star, GraduationCap } from "lucide-react";
 
 export interface CourseProps {
   id: number;
@@ -29,34 +28,46 @@ const CourseCard = ({
   gradientClass 
 }: CourseProps) => {
   return (
-    <Card className={`w-full border hover:shadow-md transition-all duration-300 ${gradientClass} animate-fade-in-right`}>
+    <Card className={`group relative overflow-hidden border-white/5 hover:border-white/10 transition-all duration-300 ${gradientClass}`}>
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+      
       <CardHeader>
         <div className="flex justify-between items-start">
-          <div>
-            <CardTitle className="text-lg font-bold">{title}</CardTitle>
-            <CardDescription className="text-sm font-medium">{provider}</CardDescription>
+          <div className="space-y-1">
+            <CardTitle className="text-lg font-bold text-gradient">{title}</CardTitle>
+            <CardDescription className="text-sm font-medium flex items-center gap-2">
+              <GraduationCap className="h-4 w-4" />
+              {provider}
+            </CardDescription>
           </div>
-          <Badge className="bg-primary/80">{level}</Badge>
+          <Badge variant="secondary" className="bg-white/10 text-white hover:bg-white/20">
+            {level}
+          </Badge>
         </div>
       </CardHeader>
+      
       <CardContent className="space-y-4">
-        <p className="text-sm line-clamp-3">{description}</p>
+        <p className="text-sm text-white/80 line-clamp-3">{description}</p>
         
         <div className="flex flex-wrap gap-1">
           {tags.map((tag, index) => (
-            <Badge key={index} variant="outline" className="bg-white/50 hover:bg-white/80">
+            <Badge 
+              key={index} 
+              variant="outline" 
+              className="bg-white/5 hover:bg-white/10 text-white/90"
+            >
               {tag}
             </Badge>
           ))}
         </div>
         
-        <div className="flex items-center justify-between text-sm text-muted-foreground pt-2">
+        <div className="flex items-center justify-between text-sm text-white/60 pt-2">
           <div className="flex items-center gap-1">
             <Clock className="h-4 w-4" />
             <span>{duration}</span>
           </div>
           <div className="flex items-center gap-1">
-            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
             <span>{rating.toFixed(1)}</span>
           </div>
           <div className="flex items-center gap-1">
@@ -65,9 +76,19 @@ const CourseCard = ({
           </div>
         </div>
       </CardContent>
+      
       <CardFooter>
-        <Button asChild className="w-full" variant="outline">
-          <a href={url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+        <Button 
+          asChild 
+          variant="secondary" 
+          className="w-full bg-white/5 hover:bg-white/10 text-white border-0"
+        >
+          <a 
+            href={url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="flex items-center gap-2"
+          >
             View Course <ExternalLink className="h-4 w-4" />
           </a>
         </Button>

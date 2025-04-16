@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, GraduationCap, Zap, Users, BookOpen, Folder } from "lucide-react";
@@ -34,7 +33,7 @@ const Index = () => {
                 <form className="flex items-center max-w-lg">
                   <div className="relative flex-1">
                     <button 
-                      onClick={() => navigate('/learn-more')}
+                      onClick={() => navigate('/dashboard')}
                       type="button"
                       className="btn-rounded w-full text-left"
                     >

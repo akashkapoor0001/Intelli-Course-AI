@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -102,12 +101,21 @@
   }
   
   .folder-card {
-    @apply rounded-t-xl rounded-r-xl rounded-bl-xl rounded-br-sm p-8 relative overflow-hidden transition-all duration-300 hover:shadow-lg;
+    @apply rounded-t-xl rounded-r-xl rounded-bl-xl rounded-br-sm p-8 relative overflow-hidden transition-all duration-300 hover:-translate-y-1;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
   }
   
   .folder-card::after {
     @apply content-[''] absolute bottom-0 right-0 w-6 h-6 bg-background;
     clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out forwards;
   }
 }
 

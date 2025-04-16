@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import ProfileForm from '@/components/ProfileForm';
 import CourseCard, { CourseProps } from '@/components/CourseCard';
@@ -7,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { BookOpen, BookmarkPlus, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 // Mock course data
 const mockCourses: CourseProps[] = [
@@ -74,8 +74,6 @@ const Dashboard = () => {
     
     // Simulate API call to get AI recommendations
     setTimeout(() => {
-      console.log("Profile data submitted:", profileData);
-      // In a real implementation, we would call an AI service here
       setRecommendedCourses(mockCourses);
       setShowForm(false);
       setIsLoading(false);
@@ -83,36 +81,46 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black">
       <Header />
       
       <main className="pt-24 pb-12 px-4 max-w-7xl mx-auto">
         {showForm ? (
-          <div className="flex flex-col items-center">
-            <div className="max-w-3xl text-center mb-8 animate-fade-in">
-              <h1 className="text-3xl font-bold gradient-heading mb-2">
-                Your Academic Journey, Enhanced
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col items-center"
+          >
+            <div className="max-w-3xl text-center mb-8">
+              <h1 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
+                Discover Your Perfect Learning Path
               </h1>
               <p className="text-lg text-muted-foreground">
-                Tell us about yourself to get AI-powered course recommendations tailored to your academic profile.
+                Let our AI match you with courses that align with your academic goals and interests.
               </p>
             </div>
             
-            <ProfileForm onProfileSubmit={handleProfileSubmit} />
-          </div>
+            <div className="w-full max-w-2xl">
+              <ProfileForm onProfileSubmit={handleProfileSubmit} />
+            </div>
+          </motion.div>
         ) : (
-          <div className="animate-fade-in">
-            <div className="flex items-center gap-2 mb-2">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="space-y-8"
+          >
+            <div className="flex items-center gap-2">
               <Sparkles className="h-6 w-6 text-primary" />
-              <h1 className="text-2xl font-bold gradient-heading">
+              <h1 className="text-3xl font-bold text-gradient">
                 Your Personalized Course Recommendations
               </h1>
             </div>
             
             <Separator className="my-4" />
             
-            <Tabs defaultValue="all" className="w-full mt-6">
-              <TabsList>
+            <Tabs defaultValue="all" className="w-full">
+              <TabsList className="bg-background/10 backdrop-blur-lg">
                 <TabsTrigger value="all" className="flex items-center gap-2">
                   <BookOpen className="h-4 w-4" /> All Courses
                 </TabsTrigger>
@@ -130,8 +138,15 @@ const Dashboard = () => {
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {recommendedCourses.map((course) => (
-                      <CourseCard key={course.id} {...course} />
+                    {recommendedCourses.map((course, index) => (
+                      <motion.div
+                        key={course.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <CourseCard {...course} />
+                      </motion.div>
                     ))}
                   </div>
                 )}
@@ -143,12 +158,9 @@ const Dashboard = () => {
                 </div>
               </TabsContent>
             </Tabs>
-          </div>
+          </motion.div>
         )}
       </main>
-      
-      <div className="absolute top-20 left-20 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float"></div>
-      <div className="absolute bottom-20 right-20 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float" style={{ animationDelay: "2s" }}></div>
     </div>
   );
 };
