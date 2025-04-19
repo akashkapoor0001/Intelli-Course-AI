@@ -180,6 +180,7 @@ const Dashboard = () => {
 
   const handleProfileSubmit = async (profileData: { interests: string; degree: string; cgpa: string }) => {
     setIsLoading(true);
+    setShowForm(false);
     setError(null);
     try {
       const courses = await getCourseRecommendations(profileData.interests, profileData.degree, profileData.cgpa);
@@ -189,7 +190,9 @@ const Dashboard = () => {
       console.error("Failed to fetch course recommendations:", err);
       setError("Failed to fetch course recommendations. Please try again.");
     } finally {
+      setTimeout(() => {
       setIsLoading(false);
+    }, 3000);
     }
   };
 

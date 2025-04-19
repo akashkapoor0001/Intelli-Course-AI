@@ -28,7 +28,7 @@ const ProfileForm = ({ onProfileSubmit }: ProfileFormProps) => {
 
     // Validate CGPA
     const cgpaNum = parseFloat(cgpa);
-    if (isNaN(cgpaNum) || cgpaNum < 0 || cgpaNum > 4.0) {
+    if (isNaN(cgpaNum) || cgpaNum < 0 || cgpaNum > 10.0) {
       toast({
         title: "Invalid CGPA",
         description: "Please enter a valid CGPA between 0.0 and 4.0",
@@ -87,11 +87,11 @@ const ProfileForm = ({ onProfileSubmit }: ProfileFormProps) => {
           </div>
           
           <div className="space-y-2">
-            <label htmlFor="cgpa" className="text-sm font-medium">Current CGPA (0.0 - 4.0)</label>
+            <label htmlFor="cgpa" className="text-sm font-medium">Current CGPA (0.0 - 10.0)</label>
             <Input 
               id="cgpa" 
               type="text" 
-              placeholder="e.g., 3.5" 
+              placeholder="e.g., 8.0" 
               value={cgpa}
               onChange={(e) => setCgpa(e.target.value)}
               required
