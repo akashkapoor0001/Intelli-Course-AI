@@ -31,7 +31,7 @@ const TypewriterText = () => {
   }, [text, isDeleting, wordIndex]);
 
   return (
-    <span className="text-blue-500 font-semibold">{text}&nbsp;<span className="animate-blink">|</span></span>
+    <span className="text-blue-500 font-bold">{text}&nbsp;<span className="animate-blink">|</span></span>
   );
 };
 
