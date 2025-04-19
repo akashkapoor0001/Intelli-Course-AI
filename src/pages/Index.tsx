@@ -1,11 +1,19 @@
-import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowRight, GraduationCap, Zap, Users, BookOpen, Folder } from "lucide-react";
-import { useUserCount } from '@/contexts/UserCountContext';
-import NeuralNetworkAnimation from '@/components/NeuralNetworkAnimation';
-import ModernNavbar from '@/components/ModernNavbar';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  ArrowRight,
+  GraduationCap,
+  Zap,
+  Users,
+  BookOpen,
+  Folder,
+} from "lucide-react";
+import { useUserCount } from "@/contexts/UserCountContext";
+import NeuralNetworkAnimation from "@/components/NeuralNetworkAnimation";
+import ModernNavbar from "@/components/ModernNavbar";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import TypewriterText from "@/components/TypeWriterText";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,10 +41,10 @@ const Index = () => {
         opacity: 0,
         y: 50,
         duration: 1,
-        ease: 'power2.out',
+        ease: "power2.out",
         scrollTrigger: {
           trigger: ref.current,
-          start: 'top 80%',
+          start: "top 80%",
           ...options,
         },
       });
@@ -58,16 +66,16 @@ const Index = () => {
           y: 50,
           duration: 1,
           delay: index * 0.1, // Stagger effect
-          ease: 'power2.out',
+          ease: "power2.out",
           scrollTrigger: {
             trigger: card,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse', // Reset animation on scroll
+            start: "top 80%",
+            toggleActions: "play none none reverse", // Reset animation on scroll
           },
         });
       });
     };
-    
+
     animateCards();
   }, []);
 
@@ -87,26 +95,28 @@ const Index = () => {
         {/* Hero Section */}
         <section ref={heroRef} className="px-6 pb-20">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
-                DIVE INTO<br />
-                THE DIGITAL<br />
-                <span className="text-gradient">WORLD</span>
+            <div className="space-y-8 flex flex-col items-center text-center">
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+                Your Personalized Path
+                <br />
+                to Smarter
+                <br />
+                <TypewriterText />
               </h1>
 
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4">
                 <button
-                  onClick={() => navigate('/login')}
+                  onClick={() => navigate("/login")}
                   type="button"
-                  className="btn-rounded w-full sm:w-auto text-left flex items-center justify-between"
+                  className="btn-rounded w-full sm:w-auto flex items-center justify-center"
                 >
                   Explore Courses
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
 
                 <button
-                  onClick={() => navigate('/learn-more')}
-                  className="btn-rounded mt-4 sm:mt-0 flex items-center justify-center"
+                  onClick={() => navigate("/learn-more")}
+                  className="btn-rounded mt-8 sm:mt-0 flex items-center justify-center"
                 >
                   <BookOpen className="h-5 w-5 mr-2" />
                   Learn More about us
@@ -141,10 +151,12 @@ const Index = () => {
             <div
               ref={addToCardRefs}
               className="folder-card card-purple cursor-pointer"
-              onClick={() => navigate('/alumni-employment-assistance')}
+              onClick={() => navigate("/alumni-employment-assistance")}
             >
               <div className="mb-8">
-                <span className="text-xs uppercase tracking-wider opacity-70">ALUMNI 21 PROGRAM</span>
+                <span className="text-xs uppercase tracking-wider opacity-70">
+                  ALUMNI 21 PROGRAM
+                </span>
               </div>
               <h3 className="text-2xl font-bold mb-4">EMPLOYMENT ASSISTANCE</h3>
               <Folder className="text-white/30 h-12 w-12 absolute bottom-4 right-4" />
@@ -153,10 +165,12 @@ const Index = () => {
             <div
               ref={addToCardRefs}
               className="folder-card card-gray cursor-pointer"
-              onClick={() => navigate('/learning-platform')}
+              onClick={() => navigate("/learning-platform")}
             >
               <div className="mb-8 flex justify-between">
-                <span className="text-xs uppercase tracking-wider opacity-70">LEARNING PLATFORM WALKTHROUGH</span>
+                <span className="text-xs uppercase tracking-wider opacity-70">
+                  LEARNING PLATFORM WALKTHROUGH
+                </span>
                 <ArrowRight className="h-5 w-5" />
               </div>
               <div className="w-20 h-20">
@@ -165,12 +179,11 @@ const Index = () => {
               <Folder className="text-white/30 h-12 w-12 absolute bottom-4 right-4" />
             </div>
 
-            <div
-              ref={addToCardRefs}
-              className="folder-card card-yellow"
-            >
+            <div ref={addToCardRefs} className="folder-card card-yellow">
               <div className="mb-8 flex justify-between">
-                <span className="text-xs uppercase tracking-wider opacity-70">USERS ENROLLED</span>
+                <span className="text-xs uppercase tracking-wider opacity-70">
+                  USERS ENROLLED
+                </span>
                 <Users className="h-5 w-5" />
               </div>
               <span className="text-6xl font-bold">{userCount}</span>
@@ -192,20 +205,37 @@ const Index = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-              {[{
-                step: 1, icon: BookOpen, title: 'Discover your interests',
-                desc: "Share your goals and we'll match you with the perfect courses"
-              }, {
-                step: 2, icon: GraduationCap, title: 'AI-Powered recommendations',
-                desc: "Our AI analyzes thousands of courses to find your perfect match"
-              }, {
-                step: 3, icon: Zap, title: 'Learn at your own pace',
-                desc: "Access high-quality courses with personalized learning paths"
-              }, {
-                step: 4, icon: Users, title: 'Join our community',
-                desc: "Connect with peers and mentors to enhance your learning experience"
-              }].map(({ step, icon: Icon, title, desc }) => (
-                <div key={step} ref={addToCardRefs} className="flex flex-col items-center text-center space-y-4">
+              {[
+                {
+                  step: 1,
+                  icon: BookOpen,
+                  title: "Discover your interests",
+                  desc: "Share your goals and we'll match you with the perfect courses",
+                },
+                {
+                  step: 2,
+                  icon: GraduationCap,
+                  title: "AI-Powered recommendations",
+                  desc: "Our AI analyzes thousands of courses to find your perfect match",
+                },
+                {
+                  step: 3,
+                  icon: Zap,
+                  title: "Learn at your own pace",
+                  desc: "Access high-quality courses with personalized learning paths",
+                },
+                {
+                  step: 4,
+                  icon: Users,
+                  title: "Join our community",
+                  desc: "Connect with peers and mentors to enhance your learning experience",
+                },
+              ].map(({ step, icon: Icon, title, desc }) => (
+                <div
+                  key={step}
+                  ref={addToCardRefs}
+                  className="flex flex-col items-center text-center space-y-4"
+                >
                   <div className="step-number">{step}</div>
                   <div className="h-12 w-12 bg-secondary/50 rounded-full flex items-center justify-center mb-4">
                     <Icon className="h-6 w-6 text-white" />
@@ -219,9 +249,13 @@ const Index = () => {
         </section>
 
         {/* Quote */}
-        <section ref={quoteRef} className="px-6 pt-12 pb-24 bg-black/20 text-center">
+        <section
+          ref={quoteRef}
+          className="px-6 pt-12 pb-24 bg-black/20 text-center"
+        >
           <blockquote className="text-2xl italic text-white/90 max-w-3xl mx-auto mb-6">
-            "Education is the passport to the future, for tomorrow belongs to those who prepare for it today."
+            "Education is the passport to the future, for tomorrow belongs to
+            those who prepare for it today."
           </blockquote>
           <p className="text-muted-foreground">— Malcolm X</p>
         </section>
@@ -235,9 +269,24 @@ const Index = () => {
           </div>
 
           <div className="flex gap-8 flex-wrap justify-center">
-            <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">Contact Us</a>
+            <a
+              href="#"
+              className="text-sm text-white/60 hover:text-white transition-colors"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="#"
+              className="text-sm text-white/60 hover:text-white transition-colors"
+            >
+              Terms of Service
+            </a>
+            <a
+              href="#"
+              className="text-sm text-white/60 hover:text-white transition-colors"
+            >
+              Contact Us
+            </a>
           </div>
 
           <p className="text-sm text-muted-foreground mt-6 md:mt-0">
