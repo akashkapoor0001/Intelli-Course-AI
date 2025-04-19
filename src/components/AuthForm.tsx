@@ -25,6 +25,8 @@ const AuthForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
 
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -42,18 +44,31 @@ const AuthForm = () => {
             title: "User already exists",
             description: "Please log in instead.",
           });
-        } else {
-          users[email] = { name, email, password };
-          localStorage.setItem("users", JSON.stringify(users));
-          toast({
-            title: "Account created",
-            description: "You can now log in with your credentials.",
-          });
-          setAuthMode("login");
-          setName("");
-          setEmail("");
-          setPassword("");
+          setIsLoading(false);
+          return;
         }
+      
+        if (password !== confirmPassword) {
+          toast({
+            title: "Passwords do not match",
+            description: "Please make sure both passwords are the same.",
+          });
+          setIsLoading(false);
+          return;
+        }
+      
+        users[email] = { name, email, password };
+        localStorage.setItem("users", JSON.stringify(users));
+        toast({
+          title: "Account created",
+          description: "You can now log in with your credentials.",
+        });
+        setAuthMode("login");
+        setName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword(""); // clear confirm password
+        setIsLoading(false);
       } else {
         if (users[email] && users[email].password === password) {
           toast({
@@ -68,9 +83,8 @@ const AuthForm = () => {
             description: "Invalid email or password.",
           });
         }
-      }
-
-      setIsLoading(false);
+        setIsLoading(false);
+      }      
     }, 1000);
   };
 
@@ -132,39 +146,50 @@ const AuthForm = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <label htmlFor="reg-name" className="text-sm font-medium">Full Name</label>
-                <Input
-                  id="reg-name"
-                  type="text"
-                  placeholder="John Doe"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="reg-email" className="text-sm font-medium">Email</label>
-                <Input
-                  id="reg-email"
-                  type="email"
-                  placeholder="student@university.edu"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="reg-password" className="text-sm font-medium">Password</label>
-                <Input
-                  id="reg-password"
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-            </CardContent>
+  <div className="space-y-2">
+    <label htmlFor="reg-name" className="text-sm font-medium">Full Name</label>
+    <Input
+      id="reg-name"
+      type="text"
+      placeholder="John Doe"
+      required
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+    />
+  </div>
+  <div className="space-y-2">
+    <label htmlFor="reg-email" className="text-sm font-medium">Email</label>
+    <Input
+      id="reg-email"
+      type="email"
+      placeholder="student@university.edu"
+      required
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+    />
+  </div>
+  <div className="space-y-2">
+    <label htmlFor="reg-password" className="text-sm font-medium">Password</label>
+    <Input
+      id="reg-password"
+      type="password"
+      required
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+    />
+  </div>
+  <div className="space-y-2">
+    <label htmlFor="reg-confirm-password" className="text-sm font-medium">Confirm Password</label>
+    <Input
+      id="reg-confirm-password"
+      type="password"
+      required
+      value={confirmPassword}
+      onChange={(e) => setConfirmPassword(e.target.value)}
+    />
+  </div>
+</CardContent>
+
             <CardFooter>
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Creating Account..." : "Create Account"}
