@@ -1,4 +1,3 @@
-```markdown
 # 🎓 Course Compass
 
 **AI-Powered Personalized Course Recommender**
@@ -99,6 +98,3 @@ If you like this project, don’t forget to ⭐️ the repo!
 
 This project is licensed under the [MIT License](LICENSE).
 
----
-
-```
