@@ -20,7 +20,7 @@ Course Compass is a web application that recommends personalized online courses 
 
 ## 🖼️ Demo
 
-Live Website: [course-compass-ai-recommend.lovable.app](https://course-compass-ai-recommend.lovable.app)
+**Live Website:** [Click here to preview](https://course-recommend-ai.vercel.app/)
 
 ---
 
