@@ -1,73 +1,104 @@
-# Welcome to your Lovable project
+```markdown
+# 🎓 Course Compass
 
-## Project info
+**AI-Powered Personalized Course Recommender**
 
-**URL**: https://lovable.dev/projects/50680941-c1c5-4d48-9e90-e38edb9babd8
+Course Compass is a web application that recommends personalized online courses based on a user's academic background, interests, and skill level. It uses **Google Gemini AI** to intelligently suggest the best learning paths.
 
-## How can I edit this code?
+> 🚀 Built with React + Vite + Tailwind + ShadCN UI + Google Gemini API
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## ✨ Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/50680941-c1c5-4d48-9e90-e38edb9babd8) and start prompting.
+- 🔍 **Smart Recommendations** — Get tailored course suggestions based on degree, CGPA, interests, and learning level.
+- 🎨 **Modern UI** — Clean and responsive design with smooth animations.
+- 🌙 **Dark & Light Mode** — Toggle between dark and light themes.
+- 🤖 **Google Gemini AI Integration** — Real-time AI-powered recommendations.
+- 📱 **Mobile Responsive** — Looks great on any device.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🖼️ Demo
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Live Website: [course-compass-ai-recommend.lovable.app](https://course-compass-ai-recommend.lovable.app)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 🧑‍💻 Tech Stack
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+| Frontend     | Backend/API       | Styling       | AI Integration       |
+|--------------|-------------------|---------------|----------------------|
+| React + Vite | Google Gemini API | Tailwind CSS  | Gemini 1.5 Pro Model |
+| ShadCN UI    | -                 | Framer Motion | OpenAI / Gemini      |
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🚀 Getting Started
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/course-compass-ai-recommend.git
+cd course-compass-ai-recommend
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Add Environment Variables
+
+Create a `.env` file and add your Gemini API Key:
+
+```bash
+VITE_GEMINI_API_KEY=your_api_key_here
+```
+
+### 4. Start the Development Server
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🛠️ Folder Structure
 
-**Use GitHub Codespaces**
+```
+src/
+├── components/
+├── pages/
+├── hooks/
+├── utils/
+├── assets/
+└── App.tsx
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 💡 Future Enhancements
 
-This project is built with:
+- User login & history tracking
+- Save and share recommended courses
+- Integration with course platforms like Coursera, Udemy
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
+## 📬 Feedback & Contributions
 
-Simply open [Lovable](https://lovable.dev/projects/50680941-c1c5-4d48-9e90-e38edb9babd8) and click on Share -> Publish.
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-## Can I connect a custom domain to my Lovable project?
+If you like this project, don’t forget to ⭐️ the repo!
 
-Yes it is!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📄 License
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+```
