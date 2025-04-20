@@ -47,7 +47,7 @@
 
 
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookOpen } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ModernNavbar from "./ModernNavbar";
 
@@ -65,6 +65,7 @@ const Header = () => {
     <header className="w-full py-4 px-6 border-b border-white/10 bg-black/80 backdrop-blur-sm fixed top-0 z-10">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center gap-2">
+        <BookOpen className="h-8 w-8 mt-1 text-primary" />
           <h1 className="text-2xl font-bold gradient-heading">CourseCompass</h1>
         </div>
 
