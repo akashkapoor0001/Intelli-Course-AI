@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const words = ["Learning", "Success", "Growth", "Innovation", "Opportunities"];
+const words = ["Learning.", "Success.", "Growth.", "Innovation.", "Opportunities."];
 const typingSpeed = 150;
 const deletingSpeed = 80;
 const delayBetweenWords = 1500;
