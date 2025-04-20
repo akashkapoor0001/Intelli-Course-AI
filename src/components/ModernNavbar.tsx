@@ -1,4 +1,3 @@
-
 // import { useNavigate, useLocation, Link } from "react-router-dom";
 // import { BookOpen, Users, Building2, PhoneCall } from "lucide-react";
 // import { Button } from "@/components/ui/button";
@@ -8,9 +7,9 @@
 //   const navigate = useNavigate();
 //   const location = useLocation();
 //   const [scrolled, setScrolled] = useState(false);
-  
+
 //   const isLoggedIn = location.pathname === '/dashboard';
-  
+
 //   useEffect(() => {
 //     const handleScroll = () => {
 //       if (window.scrollY > 20) {
@@ -19,11 +18,11 @@
 //         setScrolled(false);
 //       }
 //     };
-    
+
 //     window.addEventListener('scroll', handleScroll);
 //     return () => window.removeEventListener('scroll', handleScroll);
 //   }, []);
-  
+
 //   return (
 //     <header className={`modern-nav ${scrolled ? 'bg-black/80' : 'bg-transparent'}`}>
 //       <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -32,7 +31,7 @@
 //             <BookOpen className="h-6 w-6 text-primary" />
 //             <h1 className="text-2xl font-bold gradient-heading">CourseCompass</h1>
 //           </Link>
-          
+
 //           <nav className="hidden md:flex ml-12 space-x-1">
 //             <Link to="/learn-more" className="nav-item animate-slide-in" style={{ animationDelay: "0.1s" }}>Learning</Link>
 //             <Link to="/community" className="nav-item animate-slide-in" style={{ animationDelay: "0.2s" }}>Community</Link>
@@ -40,12 +39,12 @@
 //             <Link to="/contact" className="nav-item animate-slide-in" style={{ animationDelay: "0.4s" }}>Contact</Link>
 //           </nav>
 //         </div>
-        
+
 //         <div className="flex items-center gap-3">
 //           {isLoggedIn ? (
-//             <Button 
-//               variant="outline" 
-//               size="sm" 
+//             <Button
+//               variant="outline"
+//               size="sm"
 //               onClick={() => navigate('/login')}
 //               className="border-white/20 hover:bg-white/10 animate-fade-in"
 //             >
@@ -53,18 +52,18 @@
 //             </Button>
 //           ) : (
 //             <>
-//               <Button 
-//                 variant="ghost" 
-//                 size="sm" 
+//               <Button
+//                 variant="ghost"
+//                 size="sm"
 //                 onClick={() => navigate('/login')}
 //                 className="text-white hover:bg-white/10 animate-fade-in"
 //                 style={{ animationDelay: "0.1s" }}
 //               >
 //                 Log in
 //               </Button>
-//               <Button 
-//                 variant="default" 
-//                 size="sm" 
+//               <Button
+//                 variant="default"
+//                 size="sm"
 //                 onClick={() => navigate('/login')}
 //                 className="bg-white text-black hover:bg-white/90 animate-fade-in"
 //                 style={{ animationDelay: "0.2s" }}
@@ -80,13 +79,6 @@
 // };
 
 // export default ModernNavbar;
-
-
-
-
-
-
-
 
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { BookOpen, Menu, X } from "lucide-react";
@@ -115,36 +107,80 @@ const ModernNavbar = () => {
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <header className={`modern-nav fixed top-0 left-0 w-full z-50 transition-all ${scrolled ? "bg-black/80" : "bg-transparent"}`}>
+    <header
+      className={`modern-nav fixed top-0 left-0 w-full z-50 transition-all ${
+        scrolled ? "bg-black/80" : "bg-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 py-1 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <Link to="/" onClick={closeMobileMenu} className="flex items-center gap-2">
+          <Link
+            to="/"
+            onClick={closeMobileMenu}
+            className="flex items-center gap-2"
+          >
             <BookOpen className="h-8 w-8 mt-1 text-primary" />
-            <h1 className="text-2xl font-bold gradient-heading">CourseCompass</h1>
+            <h1 className="text-2xl font-bold gradient-heading">
+              CourseCompass
+            </h1>
           </Link>
         </div>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-6 ml-8">
-          <Link to="/learn-more" className="nav-item">Learning</Link>
-          <Link to="/community" className="nav-item">Community</Link>
-          <Link to="/company" className="nav-item">Company</Link>
-          <Link to="/contact" className="nav-item">Contact</Link>
+          <Link to="/learn-more" className="nav-item">
+            Learning
+          </Link>
+          <Link to="/community" className="nav-item">
+            Community
+          </Link>
+          <Link to="/company" className="nav-item">
+            Company
+          </Link>
+          <Link to="/contact" className="nav-item">
+            Contact
+          </Link>
+          <Link to="/ai-plus">
+            <Button
+              variant="default"
+              size="sm"
+              className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md 
+               hover:shadow-[0_0_24px_rgba(150,150,255,0.6)] 
+               transition-all duration-300 ease-in-out"
+            >
+              Course Compass AI+
+            </Button>
+          </Link>
         </nav>
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex items-center gap-3">
           {isLoggedIn ? (
-            <Button variant="outline" size="sm" onClick={() => navigate("/login")} className="border-white/20 hover:bg-white/10">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate("/login")}
+              className="border-white/20 hover:bg-white/10"
+            >
               Logout
             </Button>
           ) : (
             <>
-              <Button variant="ghost" size="sm" onClick={() => navigate("/login")} className="text-white hover:bg-white/10">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate("/login")}
+                className="text-white hover:bg-white/10"
+              >
                 Log in
               </Button>
-              <Button variant="default" size="sm" onClick={() => navigate("/login")} className="bg-white text-black hover:bg-white/90">
+              <Button
+                variant="default"
+                size="sm"
+                onClick={() => navigate("/login")}
+                className="bg-white text-black hover:bg-white/90"
+              >
                 Sign up
               </Button>
             </>
@@ -153,7 +189,10 @@ const ModernNavbar = () => {
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">
-          <button onClick={toggleMobileMenu} className="text-white focus:outline-none">
+          <button
+            onClick={toggleMobileMenu}
+            className="text-white focus:outline-none"
+          >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -162,22 +201,81 @@ const ModernNavbar = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden px-4 pb-4 space-y-3 bg-black/90 backdrop-blur-sm">
-          <Link to="/learn-more" onClick={closeMobileMenu} className="block text-white">Learning</Link>
-          <Link to="/community" onClick={closeMobileMenu} className="block text-white">Community</Link>
-          <Link to="/company" onClick={closeMobileMenu} className="block text-white">Company</Link>
-          <Link to="/contact" onClick={closeMobileMenu} className="block text-white">Contact</Link>
+          <Link
+            to="/learn-more"
+            onClick={closeMobileMenu}
+            className="block text-white"
+          >
+            Learning
+          </Link>
+          <Link
+            to="/community"
+            onClick={closeMobileMenu}
+            className="block text-white"
+          >
+            Community
+          </Link>
+          <Link
+            to="/company"
+            onClick={closeMobileMenu}
+            className="block text-white"
+          >
+            Company
+          </Link>
+          <Link
+            to="/contact"
+            onClick={closeMobileMenu}
+            className="block text-white"
+          >
+            Contact
+          </Link>
+          <Link to="/ai-plus">
+            <Button
+              variant="default"
+              size="sm"
+              className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md 
+               hover:shadow-[0_0_24px_rgba(150,150,255,0.6)] 
+               transition-all duration-300 ease-in-out 
+               w-full sm:w-auto"
+            >
+              Course Compass AI+
+            </Button>
+          </Link>
 
           <div className="pt-2 flex flex-col gap-2">
             {isLoggedIn ? (
-              <Button variant="outline" size="sm" onClick={() => { navigate("/login"); closeMobileMenu(); }}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  navigate("/login");
+                  closeMobileMenu();
+                }}
+              >
                 Logout
               </Button>
             ) : (
               <>
-                <Button variant="ghost" size="sm" onClick={() => { navigate("/login"); closeMobileMenu(); }} className="text-white">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    navigate("/login");
+                    closeMobileMenu();
+                  }}
+                  className="text-white"
+                >
                   Log in
                 </Button>
-                <Button variant="default" size="sm" onClick={() => { navigate("/login"); closeMobileMenu(); }} className="bg-white text-black">
+                <Button
+                  variant="default"
+                  size="sm"
+                  onClick={() => {
+                    navigate("/login");
+                    closeMobileMenu();
+                  }}
+                  className="bg-white text-black"
+                >
                   Sign up
                 </Button>
               </>
