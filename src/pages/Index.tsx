@@ -93,10 +93,10 @@ const Index = () => {
 
       <main className="mt-24 pt-12 flex-1">
         {/* Hero Section */}
-        <section ref={heroRef} className="px-6 pb-20">
+        <section ref={heroRef} className="px-6 mt-14 pb-20">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 flex flex-col items-center text-center">
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+              <h1 className="text-4xl md:text-7xl font-bold leading-tight">
                 Your Personalized Path
                 <br />
                 to Smarter
