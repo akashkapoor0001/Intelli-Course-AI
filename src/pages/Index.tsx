@@ -94,10 +94,10 @@ const Index = () => {
       <main className="mt-20 pt-12 flex-1">
         {/* Hero Section */}
         <section ref={heroRef} className="px-6 mt-6 sm:mt-10 md:mt-14 pb-20">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 flex flex-col items-center text-center">
-            <h1 className="text-6xl sm:text-6xl md:text-7xl font-bold leading-tight">
-            Your Personalized Path
+              <h1 className="text-6xl sm:text-6xl md:text-7xl font-bold leading-tight">
+                Your Personalized Path
                 <br />
                 to Smarter
                 <br />
@@ -108,7 +108,7 @@ const Index = () => {
                 <button
                   onClick={() => navigate("/login")}
                   type="button"
-                  className="btn-rounded w-full sm:w-auto flex items-center justify-center"
+                  className="btn-rounded w-full sm:w-auto flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white"
                 >
                   Explore Courses
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -116,7 +116,7 @@ const Index = () => {
 
                 <button
                   onClick={() => navigate("/learn-more")}
-                  className="btn-rounded mt-8 sm:mt-0 flex items-center justify-center"
+                  className="btn-rounded mt-3 sm:mt-0 flex items-center justify-center"
                 >
                   <BookOpen className="h-5 w-5 mr-2" />
                   Learn More about us
