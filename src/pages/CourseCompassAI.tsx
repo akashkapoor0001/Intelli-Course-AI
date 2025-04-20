@@ -39,7 +39,7 @@ const CourseCompassAI = () => {
   </p>
 </div>
       <div className="fixed bottom-0 left-0 right-0 bg-black text-white p-4 text-center">
-        <p className="text-sm">© 2023 Course Compass. All rights reserved.</p>
+        <p className="text-sm">© 2025 Course Compass. All rights reserved.</p>
       </div>
     </>
   );
