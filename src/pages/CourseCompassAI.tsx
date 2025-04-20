@@ -29,15 +29,17 @@ const CourseCompassAI = () => {
     <>
       <Header />
       <div className="min-h-screen mt-14 bg-black text-white p-8">
-        <h1 className="text-3xl font-bold mb-6">
-          Welcome to Course Compass AI+
-        </h1>
-        <p className="text-lg text-gray-300">
-          This is your premium AI-powered experience. 🚀 Start exploring
-          personalized recommendations, intelligent insights, and more!
-        </p>
-
-        {/* Your premium content goes here */}
+  <h1 className="text-3xl font-bold mb-6">
+    Welcome to Course Compass AI+
+  </h1>
+  <p className="text-lg text-gray-300">
+    This premium feature is currently <span className="text-blue-500 font-semibold">under development</span>. 🚧
+    <br />
+    Stay tuned for personalized course recommendations, intelligent insights, and more powered by AI!
+  </p>
+</div>
+      <div className="fixed bottom-0 left-0 right-0 bg-black text-white p-4 text-center">
+        <p className="text-sm">© 2023 Course Compass. All rights reserved.</p>
       </div>
     </>
   );
