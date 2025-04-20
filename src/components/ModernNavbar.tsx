@@ -120,7 +120,7 @@ const ModernNavbar = () => {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <Link to="/" onClick={closeMobileMenu} className="flex items-center gap-2">
-            <BookOpen className="h-6 w-6 text-primary" />
+            <BookOpen className="h-8 w-8 mt-1 text-primary" />
             <h1 className="text-2xl font-bold gradient-heading">CourseCompass</h1>
           </Link>
         </div>
