@@ -187,107 +187,109 @@ const ModernNavbar = () => {
           )}
         </div>
 
-{/* Mobile Menu Toggle */}
-<div className="md:hidden z-50 fixed top-7 right-5">
-  <button
-    onClick={toggleMobileMenu}
-    className={`text-white transition-transform duration-300 ease-in-out ${
-      isMobileMenuOpen ? "rotate-90" : "rotate-0"
-    }`}
-  >
-    {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-  </button>
-</div>
+        {/* Mobile Menu Toggle */}
+        <div className="md:hidden z-50 fixed top-7 right-5">
+          <button
+            onClick={toggleMobileMenu}
+            className={`text-white transition-transform duration-300 ease-in-out ${
+              isMobileMenuOpen ? "rotate-90" : "rotate-0"
+            }`}
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
 
-{/* Animated Mobile Menu */}
-<div
-  className={`md:hidden bg-black/90 backdrop-blur-sm px-4 pt-4 pb-6 rounded-b-xl shadow-xl transition-all duration-500 ease-in-out origin-top fixed top-0 left-0 right-0 ${
-    isMobileMenuOpen ? "max-h-[500px] opacity-100 scale-100" : "max-h-0 opacity-0 scale-y-75 overflow-hidden"
-  }`}
->
-  <div className="flex flex-col gap-4">
-    <Link
-      to="/learn-more"
-      onClick={closeMobileMenu}
-      className="text-white text-base hover:text-indigo-300 transition"
-    >
-      Learning
-    </Link>
-    <Link
-      to="/community"
-      onClick={closeMobileMenu}
-      className="text-white text-base hover:text-indigo-300 transition"
-    >
-      Community
-    </Link>
-    <Link
-      to="/company"
-      onClick={closeMobileMenu}
-      className="text-white text-base hover:text-indigo-300 transition"
-    >
-      Company
-    </Link>
-    <Link
-      to="/contact"
-      onClick={closeMobileMenu}
-      className="text-white text-base hover:text-indigo-300 transition"
-    >
-      Contact
-    </Link>
+        {/* Animated Mobile Menu */}
+        <div
+          className={`md:hidden bg-black/90 backdrop-blur-sm px-4 pt-4 pb-6 rounded-b-xl shadow-xl transition-all duration-500 ease-in-out origin-top fixed top-0 left-0 right-0 ${
+            isMobileMenuOpen
+              ? "max-h-[500px] opacity-100 scale-100"
+              : "max-h-0 opacity-0 scale-y-75 overflow-hidden"
+          }`}
+        >
+          <div className="flex flex-col gap-4">
+            <Link
+              to="/learn-more"
+              onClick={closeMobileMenu}
+              className="text-white text-base hover:text-indigo-300 transition"
+            >
+              Learning
+            </Link>
+            <Link
+              to="/community"
+              onClick={closeMobileMenu}
+              className="text-white text-base hover:text-indigo-300 transition"
+            >
+              Community
+            </Link>
+            <Link
+              to="/company"
+              onClick={closeMobileMenu}
+              className="text-white text-base hover:text-indigo-300 transition"
+            >
+              Company
+            </Link>
+            <Link
+              to="/contact"
+              onClick={closeMobileMenu}
+              className="text-white text-base hover:text-indigo-300 transition"
+            >
+              Contact
+            </Link>
 
-    <Link to="/ai-plus">
-      <Button
-        variant="default"
-        size="sm"
-        className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md 
+            <Link to="/ai-plus">
+              <Button
+                variant="default"
+                size="sm"
+                className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md 
                    hover:shadow-[0_0_24px_rgba(150,150,255,0.6)] 
                    transition-all duration-300 ease-in-out w-full"
-      >
-        Course Compass AI+
-      </Button>
-    </Link>
+              >
+                Course Compass AI+
+              </Button>
+            </Link>
 
-    <div className="pt-4 flex flex-col gap-2">
-      {isLoggedIn ? (
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => {
-            navigate("/login");
-            closeMobileMenu();
-          }}
-        >
-          Logout
-        </Button>
-      ) : (
-        <>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => {
-              navigate("/login");
-              closeMobileMenu();
-            }}
-            className="text-white"
-          >
-            Log in
-          </Button>
-          <Button
-            variant="default"
-            size="sm"
-            onClick={() => {
-              navigate("/login");
-              closeMobileMenu();
-            }}
-            className="bg-white text-black"
-          >
-            Sign up
-          </Button>
-        </>
-      )}
-    </div>
-  </div>
-</div>
+            <div className="pt-4 flex flex-col gap-2">
+              {isLoggedIn ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    navigate("/login");
+                    closeMobileMenu();
+                  }}
+                >
+                  Logout
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      navigate("/login");
+                      closeMobileMenu();
+                    }}
+                    className="text-white"
+                  >
+                    Log in
+                  </Button>
+                  <Button
+                    variant="default"
+                    size="sm"
+                    onClick={() => {
+                      navigate("/login");
+                      closeMobileMenu();
+                    }}
+                    className="bg-white text-black"
+                  >
+                    Sign up
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );
