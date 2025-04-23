@@ -141,7 +141,8 @@ const CourseCard = ({
               gradientClass,
             })
           }
-          className="text-gray-300 hover:text-white flex items-center gap-1"
+          className="text-gray-300 hover:text-white hover:bg-blue-600 rounded-md px-2 py-1 transition-colors duration-200 flex items-center gap-1"
+
         >
           {isSaved ? (
             <>
