@@ -1,30 +1,52 @@
-import { useState, useEffect } from 'react';
-import ProfileForm from '@/components/ProfileForm';
-import CourseCard, { CourseProps } from '@/components/CourseCard';
-import Header from '@/components/Header';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Separator } from '@/components/ui/separator';
-import { Skeleton } from '@/components/ui/skeleton';
-import { BookOpen, BookmarkPlus, Sparkles } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { getCourseRecommendations } from '@/lib/geminiClient';
+import { useState, useEffect } from "react";
+import ProfileForm from "@/components/ProfileForm";
+import CourseCard, { CourseProps } from "@/components/CourseCard";
+import Header from "@/components/Header";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
+import { BookOpen, BookmarkPlus, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import { getCourseRecommendations } from "@/lib/geminiClient";
 
 const Dashboard = () => {
   const [showForm, setShowForm] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [recommendedCourses, setRecommendedCourses] = useState<CourseProps[]>([]);
+  const [recommendedCourses, setRecommendedCourses] = useState<CourseProps[]>(
+    []
+  );
   const [error, setError] = useState<string | null>(null);
+  // Inside Dashboard component
+
+  const [savedCourses, setSavedCourses] = useState<CourseProps[]>([]);
+
+  const toggleSaveCourse = (course: CourseProps) => {
+    setSavedCourses((prevSaved) => {
+      const alreadySaved = prevSaved.some((c) => c.id === course.id);
+      return alreadySaved
+        ? prevSaved.filter((c) => c.id !== course.id)
+        : [...prevSaved, course];
+    });
+  };
 
   useEffect(() => {
     document.title = "Dashboard | CourseCompass";
   }, []);
 
-  const handleProfileSubmit = async (profileData: { interests: string; degree: string; cgpa: string }) => {
+  const handleProfileSubmit = async (profileData: {
+    interests: string;
+    degree: string;
+    cgpa: string;
+  }) => {
     setIsLoading(true);
     setShowForm(false);
     setError(null);
     try {
-      const courses = await getCourseRecommendations(profileData.interests, profileData.degree, profileData.cgpa);
+      const courses = await getCourseRecommendations(
+        profileData.interests,
+        profileData.degree,
+        profileData.cgpa
+      );
       setRecommendedCourses(courses);
       setShowForm(false);
     } catch (err) {
@@ -32,8 +54,8 @@ const Dashboard = () => {
       setError("Failed to fetch course recommendations. Please try again.");
     } finally {
       setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+        setIsLoading(false);
+      }, 3000);
     }
   };
 
@@ -53,7 +75,8 @@ const Dashboard = () => {
                 Discover Your Perfect Learning Path
               </h1>
               <p className="text-lg text-muted-foreground">
-                Let our AI match you with courses that align with your academic goals and interests.
+                Let our AI match you with courses that align with your academic
+                goals and interests.
               </p>
             </div>
 
@@ -84,7 +107,10 @@ const Dashboard = () => {
                   <TabsTrigger value="all" className="flex items-center gap-2">
                     <BookOpen className="h-4 w-4" /> All Courses
                   </TabsTrigger>
-                  <TabsTrigger value="saved" className="flex items-center gap-2">
+                  <TabsTrigger
+                    value="saved"
+                    className="flex items-center gap-2"
+                  >
                     <BookmarkPlus className="h-4 w-4" /> Saved Courses
                   </TabsTrigger>
                 </TabsList>
@@ -105,7 +131,13 @@ const Dashboard = () => {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
                         >
-                          <CourseCard {...course} />
+                          <CourseCard
+                            {...course}
+                            onSave={toggleSaveCourse}
+                            isSaved={savedCourses.some(
+                              (c) => c.id === course.id
+                            )}
+                          />
                         </motion.div>
                       ))}
                     </div>
@@ -117,9 +149,30 @@ const Dashboard = () => {
                 </TabsContent>
 
                 <TabsContent value="saved" className="mt-6">
-                  <div className="text-center py-8">
-                    <p className="text-muted-foreground">You haven't saved any courses yet.</p>
-                  </div>
+                  {savedCourses.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {savedCourses.map((course, index) => (
+                        <motion.div
+                          key={course.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <CourseCard
+                            {...course}
+                            onSave={toggleSaveCourse}
+                            isSaved={true}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8">
+                      <p className="text-muted-foreground">
+                        You haven't saved any courses yet.
+                      </p>
+                    </div>
+                  )}
                 </TabsContent>
               </Tabs>
             )}

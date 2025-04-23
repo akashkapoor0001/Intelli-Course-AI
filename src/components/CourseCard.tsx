@@ -15,6 +15,8 @@ import {
   BookOpen,
   Star,
   GraduationCap,
+  Bookmark,
+  BookmarkCheck,
 } from "lucide-react";
 
 export interface CourseProps {
@@ -38,6 +40,11 @@ const tagColors = [
   "bg-green-500",
 ];
 
+interface CourseCardProps extends CourseProps {
+  onSave?: (course: CourseProps) => void;
+  isSaved?: boolean;
+}
+
 const CourseCard = ({
   title,
   provider,
@@ -48,12 +55,15 @@ const CourseCard = ({
   tags,
   url,
   gradientClass,
-}: CourseProps) => {
+  onSave,
+  isSaved,
+  ...rest
+}: CourseCardProps) => {
   return (
     <div className="flex flex-col h-full">
       <div className="flex flex-col justify-between flex-grow">
         <Card
-          className={`group relative flex flex-col justify-between h-full overflow-hidden border-white/5 hover:border-white/10 transition-all duration-300 ${gradientClass}`}
+          className={`group relative flex flex-col justify-between h-full overflow-hidden border-white/5 hover:border-white/10 transition-transform transform hover:scale-[1.02] hover:shadow-lg duration-300 ${gradientClass}`}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -112,13 +122,45 @@ const CourseCard = ({
         </Card>
       </div>
 
-      {/* External Footer Button that visually matches the card */}
-      <div className="border-t border-white/5 bg-white/5 hover:bg-white/10 transition-all duration-200">
+      {/* Save + External Footer Button */}
+      <div className="flex justify-between items-center border-t border-white/5 bg-white/5 hover:bg-white/10 transition-all duration-200 px-4 py-2">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() =>
+            onSave?.({
+              ...rest,
+              title,
+              provider,
+              description,
+              level,
+              duration,
+              rating,
+              tags,
+              url,
+              gradientClass,
+            })
+          }
+          className="text-gray-300 hover:text-white flex items-center gap-1"
+        >
+          {isSaved ? (
+            <>
+              <BookmarkCheck className="h-4 w-4" />
+              Saved
+            </>
+          ) : (
+            <>
+              <Bookmark className="h-4 w-4" />
+              Save
+            </>
+          )}
+        </Button>
+
         <a
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 text-gray-400 w-full px-4 py-2"
+          className="flex items-center gap-2 text-gray-400 hover:text-white"
           style={{
             fontFamily: `'Poppins', sans-serif`,
             fontWeight: 500,
