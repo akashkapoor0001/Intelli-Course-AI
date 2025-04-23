@@ -31,6 +31,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     document.title = "Dashboard | CourseCompass";
+
+    const savedProfile = localStorage.getItem("profileData");
+    const savedCourses = localStorage.getItem("recommendedCourses");
+    const formSubmitted = localStorage.getItem("formSubmitted");
+
+    if (savedProfile && savedCourses && formSubmitted === "true") {
+      setShowForm(false);
+      setRecommendedCourses(JSON.parse(savedCourses));
+    }
   }, []);
 
   const handleProfileSubmit = async (profileData: {
@@ -48,6 +57,12 @@ const Dashboard = () => {
         profileData.cgpa
       );
       setRecommendedCourses(courses);
+
+      // Save to localStorage
+      localStorage.setItem("profileData", JSON.stringify(profileData));
+      localStorage.setItem("recommendedCourses", JSON.stringify(courses));
+      localStorage.setItem("formSubmitted", "true");
+
       setShowForm(false);
     } catch (err) {
       console.error("Failed to fetch course recommendations:", err);
@@ -90,11 +105,26 @@ const Dashboard = () => {
             animate={{ opacity: 1 }}
             className="space-y-8"
           >
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-6 w-6 text-primary" />
-              <h1 className="text-3xl font-bold text-gradient">
-                Your Personalized Course Recommendations
-              </h1>
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-6 w-6 text-primary" />
+                <h1 className="text-3xl font-bold text-gradient">
+                  Your Personalized Course Recommendations
+                </h1>
+              </div>
+
+              <button
+                onClick={() => {
+                  localStorage.removeItem("profileData");
+                  localStorage.removeItem("recommendedCourses");
+                  localStorage.removeItem("formSubmitted");
+                  setRecommendedCourses([]);
+                  setShowForm(true);
+                }}
+                className="px-3 py-1.5 text-sm font-medium text-blue-500 border border-blue-500 rounded-full hover:bg-blue-500 hover:text-white transition duration-300"
+              >
+                ← Back to Profile Form
+              </button>
             </div>
 
             <Separator className="my-4" />
