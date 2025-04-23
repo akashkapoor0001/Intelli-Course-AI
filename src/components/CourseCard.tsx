@@ -1,11 +1,6 @@
-// Project: CourseCompass
+// components/CourseCard.tsx
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
+  Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -36,8 +31,10 @@ const CourseCard = ({
   gradientClass
 }: CourseProps) => {
   return (
+    <div className="flex flex-col h-full">
+  <div className="flex flex-col justify-between flex-grow">
     <Card
-      className={`group relative flex flex-col justify-between h-full w-full overflow-hidden border-white/5 hover:border-white/10 transition-all duration-300 ${gradientClass}`}
+      className={`group relative flex flex-col justify-between h-full overflow-hidden border-white/5 hover:border-white/10 transition-all duration-300 ${gradientClass}`}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -86,25 +83,31 @@ const CourseCard = ({
           </div>
         </div>
       </CardContent>
-
-      <CardFooter>
-        <Button
-          asChild
-          variant="secondary"
-          className="w-full bg-white/5 hover:bg-white/10 text-white border-0"
-        >
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2"
-          >
-            View Course <ExternalLink className="h-4 w-4" />
-          </a>
-        </Button>
-      </CardFooter>
     </Card>
+  </div>
+
+  {/* External Footer Button that visually matches the card */}
+  <div className="border-t border-white/5 bg-white/5 hover:bg-white/10 transition-all duration-200">
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center justify-center gap-2 text-gray-400 w-full px-4 py-2"
+    style={{
+      fontFamily: `'Poppins', sans-serif`,
+      fontWeight: 500,
+      fontSize: '15px',
+    }}
+  >
+    View Course <ExternalLink className="h-4 w-4" />
+  </a>
+</div>
+
+
+</div>
+
   );
 };
+
 
 export default CourseCard;
