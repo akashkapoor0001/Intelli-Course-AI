@@ -19,6 +19,9 @@ export interface CourseProps {
   gradientClass: string;
 }
 
+const tagColors = ["bg-blue-500", "bg-purple-500", "bg-pink-500", "bg-yellow-500", "bg-green-500"];
+
+
 const CourseCard = ({
   title,
   provider,
@@ -58,13 +61,13 @@ const CourseCard = ({
 
         <div className="flex flex-wrap gap-1">
           {tags.map((tag, index) => (
-            <Badge
-              key={index}
-              variant="outline"
-              className="bg-white/5 hover:bg-white/10 text-white/90"
-            >
-              {tag}
-            </Badge>
+<Badge
+  key={index}
+  variant="outline"
+  className={`text-white/90 ${tagColors[index % tagColors.length]} bg-opacity-20`}
+>
+  {tag}
+</Badge>
           ))}
         </div>
 
