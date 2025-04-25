@@ -1,8 +1,22 @@
-
-import { Bookmark, BookmarkCheck, ExternalLink, Clock, BookOpen, Star, GraduationCap } from "lucide-react";
+import {
+  Bookmark,
+  BookmarkCheck,
+  ExternalLink,
+  Clock,
+  BookOpen,
+  Star,
+  GraduationCap,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 
@@ -51,19 +65,16 @@ const CourseCard = ({
   // Animate card when the save state changes
   useEffect(() => {
     controls.start({
-      scale: [1, 1.05, 1],  // Scale animation
-      transition: { duration: 0.4, ease: "easeInOut" }
+      scale: [1, 1.05, 1], // Scale animation
+      transition: { duration: 0.4, ease: "easeInOut" },
     });
   }, [isSaved, controls]);
 
   return (
-    <motion.div
-      animate={controls}
-      className="flex flex-col h-full"
-    >
+    <motion.div animate={controls} className="flex flex-col h-full">
       <div className="flex flex-col justify-between flex-grow">
         <Card
-          className={`group relative flex flex-col justify-between h-full overflow-hidden border-white/5 hover:border-white/10 transition-transform transform hover:scale-[1.02] hover:shadow-lg duration-300 ${gradientClass}`}
+          className={`group relative flex flex-col justify-between h-full overflow-hidden border-white/5 transition-transform transform hover:scale-[1.02] duration-300 ${gradientClass} hover:shadow-[0_0_10px_2px_rgba(59,130,246,0.25)]`}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -95,7 +106,9 @@ const CourseCard = ({
                 <Badge
                   key={index}
                   variant="outline"
-                  className={`text-white/90 ${tagColors[index % tagColors.length]} bg-opacity-20`}
+                  className={`text-white/90 ${
+                    tagColors[index % tagColors.length]
+                  } bg-opacity-20`}
                 >
                   {tag}
                 </Badge>
