@@ -89,6 +89,7 @@ const AuthForm = () => {
   };
 
   return (
+    <div className="min-h-screen flex flex-col justify-start items-center px-4 pt-6 bg-background">
     <Card className="w-full max-w-md border shadow-lg animate-scale-in">
       <Tabs value={authMode} onValueChange={(val: "login" | "register") => setAuthMode(val)} className="w-full">
         <TabsList className="grid w-full grid-cols-2">
@@ -199,6 +200,7 @@ const AuthForm = () => {
         </TabsContent>
       </Tabs>
     </Card>
+  </div>
   );
 };
 
