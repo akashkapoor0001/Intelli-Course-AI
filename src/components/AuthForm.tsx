@@ -275,13 +275,15 @@ const AuthForm = () => {
                   />
                   <span>
                     I agree to the{" "}
-                    <Link to ="/terms-of-service"
+                    <Link
+                      to="/terms-of-service"
                       className="text-primary underline underline-offset-4 hover:text-blue-700 transition-colors"
                     >
                       Terms of Service
                     </Link>{" "}
                     and{" "}
-                    <Link to ="/privacy-policy"
+                    <Link
+                      to="/privacy-policy"
                       className="text-primary underline underline-offset-4 hover:text-blue-700 transition-colors"
                     >
                       Privacy Policy
