@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Check, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -274,19 +275,17 @@ const AuthForm = () => {
                   />
                   <span>
                     I agree to the{" "}
-                    <a
-                      href="#"
+                    <Link to ="/terms-of-service"
                       className="text-primary underline underline-offset-4 hover:text-blue-700 transition-colors"
                     >
                       Terms of Service
-                    </a>{" "}
+                    </Link>{" "}
                     and{" "}
-                    <a
-                      href="#"
+                    <Link to ="/privacy-policy"
                       className="text-primary underline underline-offset-4 hover:text-blue-700 transition-colors"
                     >
                       Privacy Policy
-                    </a>
+                    </Link>
                     .
                   </span>
                 </label>

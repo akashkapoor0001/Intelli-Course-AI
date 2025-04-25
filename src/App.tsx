@@ -16,6 +16,8 @@ import Contact from "./pages/Contact";
 import CourseCompassAI from "./pages/CourseCompassAI";
 import LearningPlatform from "./pages/LearningPlatform";
 import AlumniEmployment from "./pages/AlumniEmployment";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +41,8 @@ const App = () => (
               <Route path="/learning-platform" element={<LearningPlatform />} />
               <Route path="/alumni-employment-assistance" element={<AlumniEmployment />} />
               <Route path="*" element={<NotFound />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             </Routes>
           </BrowserRouter>
         </div>
