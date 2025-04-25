@@ -200,7 +200,7 @@ const AuthForm = () => {
         </TabsContent>
       </Tabs>
     </Card>
-  </div>
+    </div>
   );
 };
 
