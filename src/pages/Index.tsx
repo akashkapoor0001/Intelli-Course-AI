@@ -33,7 +33,7 @@ const Index = () => {
   cardRefs.current = [];
 
   useEffect(() => {
-    document.title = "CourseCompass | AI-Powered Course Recommendations";
+    document.title = "IntelliCourse | AI-Powered Course Recommendations";
 
     // Function to animate any section with ScrollTrigger
     const animateSection = (ref, options) => {
@@ -265,7 +265,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-2 mb-6 md:mb-0">
             <BookOpen className="h-5 w-5 text-primary" />
-            <span className="font-medium gradient-heading">CourseCompass</span>
+            <span className="font-medium gradient-heading">IntelliCourse</span>
           </div>
 
           <div className="flex gap-8 flex-wrap justify-center">
@@ -290,7 +290,7 @@ const Index = () => {
           </div>
 
           <p className="text-sm text-muted-foreground mt-6 md:mt-0">
-            © {new Date().getFullYear()} CourseCompass. All rights reserved.
+            © {new Date().getFullYear()} IntelliCourse. All rights reserved.
           </p>
         </div>
       </footer>

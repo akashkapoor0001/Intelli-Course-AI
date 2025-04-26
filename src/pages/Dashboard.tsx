@@ -42,7 +42,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    document.title = "Dashboard | CourseCompass";
+    document.title = "Dashboard | IntelliCourse";
     const savedProfile = localStorage.getItem("profileData");
     const savedCourses = localStorage.getItem("recommendedCourses");
     const formSubmitted = localStorage.getItem("formSubmitted");
