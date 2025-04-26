@@ -31,6 +31,8 @@ export interface CourseProps {
   tags: string[];
   url: string;
   gradientClass: string;
+  skills?: string[];    // ✅ Optional property for AI output
+  keywords?: string[];  // ✅ Optional property for AI output
 }
 
 const tagColors = [
