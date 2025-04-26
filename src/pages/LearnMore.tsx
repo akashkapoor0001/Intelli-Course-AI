@@ -19,7 +19,7 @@ const LearnMore = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-    document.title = "Learn More | CourseCompass";
+    document.title = "Learn More | IntelliCourse";
   }, []);
 
   return (
@@ -32,7 +32,7 @@ const LearnMore = () => {
           {/* Hero section */}
           <section className="text-center space-y-6 animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-bold gradient-heading">
-              How CourseCompass Works
+              How IntelliCourse Works
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Discover how our AI-powered platform finds the perfect courses tailored specifically to your academic journey.
@@ -136,7 +136,7 @@ const LearnMore = () => {
             <h2 className="text-3xl font-bold gradient-heading text-center">Student Testimonials</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="glass-card p-6 animate-fade-in">
-                <p className="text-lg mb-4 italic text-white/90">"CourseCompass helped me find the perfect data science track that matched my background in statistics. The AI recommendations were spot on!"</p>
+                <p className="text-lg mb-4 italic text-white/90">"IntelliCourse helped me find the perfect data science track that matched my background in statistics. The AI recommendations were spot on!"</p>
                 <div className="flex items-center">
                   <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
                     <img src="/lovable-uploads/2f36433c-568b-4f51-bf02-8c7a447545d9.png" alt="Student" className="w-full h-full object-cover" />
@@ -149,7 +149,7 @@ const LearnMore = () => {
               </div>
               
               <div className="glass-card p-6 animate-fade-in">
-                <p className="text-lg mb-4 italic text-white/90">"I was overwhelmed by all the web development courses available online. CourseCompass narrowed it down to the three best options for my skill level and goals."</p>
+                <p className="text-lg mb-4 italic text-white/90">"I was overwhelmed by all the web development courses available online. IntelliCourse narrowed it down to the three best options for my skill level and goals."</p>
                 <div className="flex items-center">
                   <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
                     <img src="/lovable-uploads/2f36433c-568b-4f51-bf02-8c7a447545d9.png" alt="Student" className="w-full h-full object-cover" />
@@ -167,7 +167,7 @@ const LearnMore = () => {
           <section className="glass-card p-8 text-center space-y-6 animate-fade-in">
             <h2 className="text-3xl font-bold gradient-heading">Ready to Find Your Perfect Courses?</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Join thousands of students who have discovered their ideal learning path with CourseCompass.
+              Join thousands of students who have discovered their ideal learning path with IntelliCourse.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
               <Button 
@@ -193,11 +193,11 @@ const LearnMore = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
             <BookOpen className="h-5 w-5 text-primary" />
-            <span className="font-medium gradient-heading">CourseCompass</span>
+            <span className="font-medium gradient-heading">IntelliCourse</span>
           </div>
           
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} CourseCompass. All rights reserved.
+            © {new Date().getFullYear()} IntelliCourse. All rights reserved.
           </p>
         </div>
       </footer>

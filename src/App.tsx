@@ -13,7 +13,7 @@ import NotFound from "./pages/NotFound";
 import Community from "./pages/Community";
 import Company from "./pages/Company";
 import Contact from "./pages/Contact";
-import CourseCompassAI from "./pages/CourseCompassAI";
+import IntelliCourseAI from "./pages/IntelliCourseAI";
 import LearningPlatform from "./pages/LearningPlatform";
 import AlumniEmployment from "./pages/AlumniEmployment";
 import TermsOfService from "./pages/TermsOfService";
@@ -37,7 +37,7 @@ const App = () => (
               <Route path="/community" element={<Community />} />
               <Route path="/company" element={<Company />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/ai-plus" element={<CourseCompassAI />} />
+              <Route path="/ai-plus" element={<IntelliCourseAI />} />
               <Route path="/learning-platform" element={<LearningPlatform />} />
               <Route path="/alumni-employment-assistance" element={<AlumniEmployment />} />
               <Route path="*" element={<NotFound />} />

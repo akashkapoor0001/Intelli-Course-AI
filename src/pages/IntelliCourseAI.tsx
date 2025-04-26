@@ -1,10 +1,10 @@
-// src/pages/CourseCompassAI+.tsx
+// src/pages/IntelliCourseAI+.tsx
 import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import { Loader2 } from "lucide-react"; // Optional spinner
 import aiGif from "@/assets/AILoading.gif"; // Place your AI animation/gif here
 
-const CourseCompassAI = () => {
+const IntelliCourseAI = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const CourseCompassAI = () => {
       <Header />
       <div className="min-h-screen mt-14 bg-black text-white p-8">
   <h1 className="text-3xl font-bold mb-6">
-    Welcome to Course Compass AI+
+    Welcome to IntelliCourse AI+
   </h1>
   <p className="text-lg text-gray-300">
     This premium feature is currently <span className="text-blue-500 font-semibold">under development</span>. 🚧
@@ -39,10 +39,10 @@ const CourseCompassAI = () => {
   </p>
 </div>
       <div className="fixed bottom-0 left-0 right-0 bg-black text-white p-4 text-center">
-        <p className="text-sm">© 2025 Course Compass. All rights reserved.</p>
+        <p className="text-sm">© 2025 IntelliCourse. All rights reserved.</p>
       </div>
     </>
   );
 };
 
-export default CourseCompassAI;
+export default IntelliCourseAI;

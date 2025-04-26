@@ -6,7 +6,7 @@ import NeuralNetworkAnimation from '@/components/NeuralNetworkAnimation';
 
 const Company = () => {
   useEffect(() => {
-    document.title = "Company | CourseCompass";
+    document.title = "Company | IntelliCourse";
   }, []);
 
   return (
@@ -17,7 +17,7 @@ const Company = () => {
       <main className="pt-28 px-6 pb-12">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-4xl md:text-5xl font-bold gradient-heading mb-6">About CourseCompass</h1>
+            <h1 className="text-4xl md:text-5xl font-bold gradient-heading mb-6">About IntelliCourse</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               We're on a mission to revolutionize education with AI-powered course recommendations
               that help students discover their perfect learning path.
@@ -28,7 +28,7 @@ const Company = () => {
             <div className="glass-card p-10 animate-fade-in" style={{ animationDelay: "0.1s" }}>
               <h2 className="text-3xl font-bold mb-6 gradient-heading">Our Story</h2>
               <p className="text-lg text-muted-foreground mb-6">
-                CourseCompass was founded in 2023 by a team of education enthusiasts and AI specialists 
+                IntelliCourse was founded in 2025 by a team of education enthusiasts and AI specialists 
                 who recognized a fundamental problem in online education: the overwhelming number of 
                 courses available makes it difficult for learners to find the right resources for their 
                 specific needs.
@@ -43,7 +43,7 @@ const Company = () => {
             <div className="glass-card overflow-hidden animate-fade-in" style={{ animationDelay: "0.2s" }}>
               <img 
                 src="/lovable-uploads/2f36433c-568b-4f51-bf02-8c7a447545d9.png" 
-                alt="CourseCompass Team" 
+                alt="IntelliCourse Team" 
                 className="w-full h-full object-cover" 
               />
             </div>

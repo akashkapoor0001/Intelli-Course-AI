@@ -9,7 +9,7 @@ const Login = () => {
   const { incrementUserCount } = useUserCount();
   
   useEffect(() => {
-    document.title = "Login | CourseCompass";
+    document.title = "Login | IntelliCourse";
   }, []);
 
   // Increment user count when someone completes login

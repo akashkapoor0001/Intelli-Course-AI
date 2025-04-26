@@ -7,7 +7,7 @@ import NeuralNetworkAnimation from '@/components/NeuralNetworkAnimation';
 
 const Contact = () => {
   useEffect(() => {
-    document.title = "Contact | CourseCompass";
+    document.title = "Contact | IntelliCourse";
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -43,9 +43,9 @@ const Contact = () => {
                   <div>
                     <h3 className="text-lg font-medium mb-2">Email Us</h3>
                     <p className="text-muted-foreground mb-1">General Inquiries:</p>
-                    <a href="mailto:info@coursecompass.com" className="text-blue-400 hover:underline">info@coursecompass.com</a>
+                    <a href="mailto:info@IntelliCourse.com" className="text-blue-400 hover:underline">info@IntelliCourse.com</a>
                     <p className="text-muted-foreground mt-2 mb-1">Support:</p>
-                    <a href="mailto:support@coursecompass.com" className="text-blue-400 hover:underline">support@coursecompass.com</a>
+                    <a href="mailto:support@IntelliCourse.com" className="text-blue-400 hover:underline">support@IntelliCourse.com</a>
                   </div>
                 </div>
                 

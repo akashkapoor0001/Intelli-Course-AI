@@ -122,7 +122,7 @@ const ModernNavbar = () => {
           >
             <BookOpen className="h-8 w-8 mt-1 text-primary" />
             <h1 className="text-2xl font-bold gradient-heading">
-              CourseCompass
+              IntelliCourse
             </h1>
           </Link>
         </div>
@@ -149,7 +149,7 @@ const ModernNavbar = () => {
                hover:shadow-[0_0_24px_rgba(150,150,255,0.6)] 
                transition-all duration-300 ease-in-out"
             >
-              Course Compass AI+
+              IntelliCourse AI+
             </Button>
           </Link>
         </nav>
@@ -245,7 +245,7 @@ const ModernNavbar = () => {
                    hover:shadow-[0_0_24px_rgba(150,150,255,0.6)] 
                    transition-all duration-300 ease-in-out w-full"
               >
-                Course Compass AI+
+                IntelliCourse AI+
               </Button>
             </Link>
 

@@ -6,7 +6,7 @@ import NeuralNetworkAnimation from '@/components/NeuralNetworkAnimation';
 
 const Community = () => {
   useEffect(() => {
-    document.title = "Community | CourseCompass";
+    document.title = "Community | IntelliCourse";
   }, []);
 
   return (
@@ -53,7 +53,7 @@ const Community = () => {
             <h2 className="text-3xl font-bold mb-6 gradient-heading">Featured Community Stories</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-white/5 p-6 rounded-xl border border-white/10">
-                <p className="text-lg mb-4">"The CourseCompass community helped me transition from a non-tech background to becoming a full-stack developer in just 8 months."</p>
+                <p className="text-lg mb-4">"The IntelliCourse community helped me transition from a non-tech background to becoming a full-stack developer in just 8 months."</p>
                 <div className="flex items-center">
                   <div className="w-10 h-10 rounded-full bg-blue-500 mr-3"></div>
                   <div>
