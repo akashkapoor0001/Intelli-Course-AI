@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, ReactNode } from "react";
+import CountUp from "react-countup";
 import ProfileForm from "@/components/ProfileForm";
 import CourseCard, { CourseProps } from "@/components/CourseCard";
 import Header from "@/components/Header";
@@ -8,13 +9,28 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { BookOpen, BookmarkPlus, Sparkles, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 import { getCourseRecommendations } from "@/lib/geminiClient";
+import {
+  PieChart,
+  Pie,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+  Legend,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 const Dashboard = () => {
   const [showForm, setShowForm] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [recommendedCourses, setRecommendedCourses] = useState<CourseProps[]>([]);
+  const [recommendedCourses, setRecommendedCourses] = useState<CourseProps[]>(
+    []
+  );
   const [error, setError] = useState<string | null>(null);
   const [savedCourses, setSavedCourses] = useState<CourseProps[]>([]);
+  const COLORS = ["#60A5FA", "#FBBF24", "#F87171"]; // blue, yellow, red
 
   const toggleSaveCourse = (course: CourseProps) => {
     setSavedCourses((prevSaved) => {
@@ -24,15 +40,6 @@ const Dashboard = () => {
         : [...prevSaved, course];
     });
   };
-
-  const topSkills = Array.from(
-    new Set(
-      recommendedCourses
-        .flatMap((course) => course.skills || [])
-        .filter((skill) => skill && skill.trim() !== "")
-    )
-  ).slice(0, 5); // Get top 5 unique skills
-  
 
   useEffect(() => {
     document.title = "Dashboard | CourseCompass";
@@ -75,54 +82,116 @@ const Dashboard = () => {
     }
   };
 
+  const InsightCard = ({
+    title,
+    value,
+  }: {
+    title: string;
+    value: ReactNode;
+  }) => {
+    const numericValue = typeof value === "number" ? value : Number(value);
+
+    return (
+      <div className="p-6 rounded-xl bg-background/20 backdrop-blur-md flex flex-col items-center text-center space-y-3 shadow-md border border-gray-700">
+        <h3 className="text-lg font-semibold text-primary">{title}</h3>
+        <motion.div
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl font-bold text-white"
+        >
+          {Number.isFinite(numericValue) ? (
+            <CountUp start={0} end={numericValue} duration={0.75} separator="," className="text-blue-500" />
+          ) : (
+            value
+          )}
+        </motion.div>
+      </div>
+    );
+  };
+
+  const CourseCardSkeleton = () => (
+    <div className="border rounded-lg p-6 space-y-4">
+      <div className="space-y-2">
+        <Skeleton className="h-6 w-3/4" />
+        <Skeleton className="h-4 w-1/2" />
+      </div>
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-4 w-2/3" />
+      </div>
+      <div className="flex gap-2">
+        <Skeleton className="h-6 w-16 rounded-full" />
+        <Skeleton className="h-6 w-16 rounded-full" />
+      </div>
+      <Skeleton className="h-10 w-full" />
+    </div>
+  );
+
   // Insights Calculation
-const insights = useMemo(() => {
-  const totalCourses = recommendedCourses.length;
+  const insights = useMemo(() => {
+    const totalCourses = recommendedCourses.length;
 
-  const keywordCount: Record<string, number> = {};
-  let beginnerCount = 0;
-  let advancedCount = 0;
+    const keywordCount: Record<string, number> = {};
+    let beginnerCount = 0;
+    let intermediateCount = 0;
+    let advancedCount = 0;
 
-  recommendedCourses.forEach((course) => {
-    // Check for keywords/skills field
-    const skills = course.skills?.length ? course.skills : (course.keywords?.length ? course.keywords : []);
+    recommendedCourses.forEach((course) => {
+      // Check for keywords/skills field
+      const skills = course.skills?.length
+        ? course.skills
+        : course.keywords?.length
+        ? course.keywords
+        : [];
 
-    skills.forEach((skill: string) => {
-      if (skill.trim()) {  // Ignore empty strings
-        keywordCount[skill] = (keywordCount[skill] || 0) + 1;
-      }
+      skills.forEach((skill: string) => {
+        if (skill.trim()) {
+          // Ignore empty strings
+          keywordCount[skill] = (keywordCount[skill] || 0) + 1;
+        }
+      });
+
+      if (course.level === "Beginner") beginnerCount++;
+      else if (course.level === "Intermediate") intermediateCount++;
+      else if (course.level === "Advanced") advancedCount++;
     });
 
-    if (course.level === "Beginner") beginnerCount++;
-    else if (course.level === "Advanced") advancedCount++;
-  });
+    // Find most common skill only if there are skills counted
+    const mostCommonSkill =
+      Object.keys(keywordCount).length > 0
+        ? Object.keys(keywordCount).sort(
+            (a, b) => keywordCount[b] - keywordCount[a]
+          )[0]
+        : "No skills available";
 
-  // Find most common skill only if there are skills counted
-  const mostCommonSkill = Object.keys(keywordCount).length > 0
-    ? Object.keys(keywordCount).sort((a, b) => keywordCount[b] - keywordCount[a])[0]
-    : "No skills available";
-
-  return {
-    totalCourses,
-    mostCommonSkill,
-    beginnerCount,
-    advancedCount,
-  };
-}, [recommendedCourses]);
-
+    return {
+      totalCourses,
+      mostCommonSkill,
+      beginnerCount,
+      intermediateCount,
+      advancedCount,
+    };
+  }, [recommendedCourses]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black">
       <Header />
       <main className="pt-24 pb-12 px-4 max-w-7xl mx-auto">
         {showForm ? (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col items-center"
+          >
             <div className="max-w-3xl text-center mb-8">
               <h1 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
                 Discover Your Perfect Learning Path
               </h1>
               <p className="text-lg text-muted-foreground">
-                Let our AI match you with courses that align with your academic goals and interests.
+                Let our AI match you with courses that align with your academic
+                goals and interests.
               </p>
             </div>
             <div className="w-full max-w-2xl">
@@ -130,7 +199,11 @@ const insights = useMemo(() => {
             </div>
           </motion.div>
         ) : (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="space-y-8"
+          >
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-6 w-6 text-primary" />
@@ -162,10 +235,16 @@ const insights = useMemo(() => {
                   <TabsTrigger value="all" className="flex items-center gap-2">
                     <BookOpen className="h-4 w-4" /> All Courses
                   </TabsTrigger>
-                  <TabsTrigger value="saved" className="flex items-center gap-2">
+                  <TabsTrigger
+                    value="saved"
+                    className="flex items-center gap-2"
+                  >
                     <BookmarkPlus className="h-4 w-4" /> Saved Courses
                   </TabsTrigger>
-                  <TabsTrigger value="insights" className="flex items-center gap-2 hover:bg-blue-500 hover:text-white transition-colors duration-200 p-2 rounded-lg"                  >
+                  <TabsTrigger
+                    value="insights"
+                    className="flex items-center gap-2 hover:bg-blue-500 hover:text-white transition-colors duration-200 p-2 rounded-lg"
+                  >
                     <BarChart3 className="h-4 w-4" /> Insights
                   </TabsTrigger>
                 </TabsList>
@@ -189,7 +268,9 @@ const insights = useMemo(() => {
                           <CourseCard
                             {...course}
                             onSave={toggleSaveCourse}
-                            isSaved={savedCourses.some((c) => c.id === course.id)}
+                            isSaved={savedCourses.some(
+                              (c) => c.id === course.id
+                            )}
                           />
                         </motion.div>
                       ))}
@@ -211,13 +292,19 @@ const insights = useMemo(() => {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
                         >
-                          <CourseCard {...course} onSave={toggleSaveCourse} isSaved={true} />
+                          <CourseCard
+                            {...course}
+                            onSave={toggleSaveCourse}
+                            isSaved={true}
+                          />
                         </motion.div>
                       ))}
                     </div>
                   ) : (
                     <div className="text-center py-8">
-                      <p className="text-muted-foreground">You haven't saved any courses yet.</p>
+                      <p className="text-muted-foreground">
+                        You haven't saved any courses yet.
+                      </p>
                     </div>
                   )}
                 </TabsContent>
@@ -226,12 +313,134 @@ const insights = useMemo(() => {
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                    className="grid grid-cols-1 lg:grid-cols-2 gap-8"
                   >
-                    <InsightCard title="Total Courses" value={insights.totalCourses} />
-                    <InsightCard title="Top Skill" value={insights.mostCommonSkill} />
-                    <InsightCard title="Beginner Courses" value={insights.beginnerCount} />
-                    <InsightCard title="Advanced Courses" value={insights.advancedCount} />
+                    {/* Left Side: Insight Cards */}
+                    <div className="space-y-6">
+                      <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
+                        <InsightCard
+                          title="Total Courses"
+                          value={Number(insights.totalCourses)}
+                        />
+
+                        <InsightCard
+                          title="Top Skill"
+                          value={
+                            <span className="text-red-600">
+                              {insights.mostCommonSkill}
+                            </span>
+                          }
+                        />
+                        <InsightCard
+                          title="Beginner Courses"
+                          value={Number(insights.beginnerCount)}
+                        />
+                        <InsightCard
+                          title="Intermediate Courses"
+                          value={Number(insights.intermediateCount)}
+                        />
+                        <InsightCard
+                          title="Advanced Courses"
+                          value={Number(insights.advancedCount)}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Right Side: Charts */}
+                    <div className="bg-background/20 backdrop-blur-md rounded-xl p-6 shadow-md border border-gray-700">
+                      <h2 className="text-2xl font-semibold text-primary mb-4 text-center">
+                        Course % Levels
+                      </h2>
+
+                      <ResponsiveContainer width="100%" height={250}>
+                        <PieChart>
+                          <Pie
+                            data={[
+                              {
+                                name: "Beginner",
+                                value: insights.beginnerCount,
+                              },
+                              {
+                                name: "Intermediate",
+                                value: insights.intermediateCount,
+                              },
+                              {
+                                name: "Advanced",
+                                value: insights.advancedCount,
+                              },
+                            ]}
+                            cx="50%"
+                            cy="50%"
+                            outerRadius={80}
+                            label={({ name, percent }) =>
+                              `${name}: ${(percent * 100).toFixed(0)}%`
+                            } // ✨ Better labels on pie slices
+                            dataKey="value"
+                          >
+                            {COLORS.map((color, index) => (
+                              <Cell key={`cell-${index}`} fill={color} />
+                            ))}
+                          </Pie>
+                          <Tooltip
+                            formatter={(value, name) => [
+                              `${value} Courses`,
+                              `${name}`,
+                            ]} // ✨ Cleaner tooltip format
+                            contentStyle={{
+                              backgroundColor: "#1f2937", // dark background
+                              borderRadius: "8px",
+                              border: "none",
+                              color: "#fff",
+                            }}
+                          />
+                          <Legend />
+                        </PieChart>
+                      </ResponsiveContainer>
+
+                      <h2 className="text-2xl font-semibold text-primary mt-8 mb-4 text-center">
+                        Difficulty Level Overview
+                      </h2>
+
+                      <ResponsiveContainer width="100%" height={250}>
+                        <BarChart
+                          data={[
+                            {
+                              name: "Beginner",
+                              Courses: insights.beginnerCount,
+                            },
+                            {
+                              name: "Intermediate",
+                              Courses: insights.intermediateCount,
+                            },
+                            {
+                              name: "Advanced",
+                              Courses: insights.advancedCount,
+                            },
+                          ]}
+                          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                        >
+                          <XAxis dataKey="name" />
+                          <YAxis domain={[0, "dataMax"]} />
+                          <Tooltip
+                            formatter={(value) => [`${value} Courses`]} // ✨ Better hover
+                            contentStyle={{
+                              backgroundColor: "#1f2937", // dark background
+                              borderRadius: "8px",
+                              border: "none",
+                              color: "#fff",
+                            }}
+                          />
+                          <Legend />
+                          <Bar
+                            dataKey="Courses"
+                            fill="#60A5FA"
+                            radius={[10, 10, 0, 0]}
+                            isAnimationActive={true} // Animation is active by default
+                            animationDuration={1500} // Animation duration in milliseconds
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
                   </motion.div>
                 </TabsContent>
               </Tabs>
@@ -242,38 +451,5 @@ const insights = useMemo(() => {
     </div>
   );
 };
-
-const InsightCard = ({ title, value }: { title: string; value: string | number }) => (
-  <div className="p-6 rounded-xl bg-background/20 backdrop-blur-md flex flex-col items-center text-center space-y-3 shadow-md border border-gray-700">
-    <h3 className="text-lg font-semibold text-primary">{title}</h3>
-    <motion.div
-      initial={{ scale: 0.8 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 0.6 }}
-      className="text-3xl font-bold text-white"
-    >
-      {value}
-    </motion.div>
-  </div>
-);
-
-const CourseCardSkeleton = () => (
-  <div className="border rounded-lg p-6 space-y-4">
-    <div className="space-y-2">
-      <Skeleton className="h-6 w-3/4" />
-      <Skeleton className="h-4 w-1/2" />
-    </div>
-    <div className="space-y-2">
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-2/3" />
-    </div>
-    <div className="flex gap-2">
-      <Skeleton className="h-6 w-16 rounded-full" />
-      <Skeleton className="h-6 w-16 rounded-full" />
-    </div>
-    <Skeleton className="h-10 w-full" />
-  </div>
-);
 
 export default Dashboard;
