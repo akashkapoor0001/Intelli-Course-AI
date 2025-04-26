@@ -1,4 +1,4 @@
-# 🎓 Course Compass
+# 🎓 IntelliCourse
 
 **AI-Powered Personalized Course Recommender**
 
@@ -38,8 +38,8 @@ Course Compass is a web application that recommends personalized online courses 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/course-compass-ai-recommend.git
-cd course-compass-ai-recommend
+git clone https://github.com/your-username/Intelli-Course-AI.git
+cd Intelli-Course-AI
 ```
 
 ### 2. Install Dependencies
