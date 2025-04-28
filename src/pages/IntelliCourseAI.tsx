@@ -6,11 +6,11 @@ import { Loader2 } from "lucide-react";
 import aiGif from "@/assets/AILoading.gif";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import Roadmap from "@/assets/Roadmap.png"; // Example image import
-import skillGapImg from "@/assets/skillGap.jpg"; // Example image import
-import aiCareerCoachImg from "@/assets/aiCareerCoach.jpg"; // Example image import
-import resumeBuilderImg from "@/assets/resumeBuilder.jpg"; // Example image import
-import industryInsightsImg from "@/assets/industryInsights.jpg"; // Example image import
+import Roadmap from "@/assets/Roadmap.png"; 
+import skillGapImg from "@/assets/skillGap.jpg"; 
+import aiCareerCoachImg from "@/assets/aiCareerCoach.jpg"; 
+import resumeBuilderImg from "@/assets/resumeBuilder.jpg"; 
+import industryInsightsImg from "@/assets/industryInsights.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
