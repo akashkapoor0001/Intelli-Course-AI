@@ -13,14 +13,13 @@ const BrainNeuron = () => {
 
     const scene = new THREE.Scene();
 
-    // Create camera with an aspect ratio based on container size
     const camera = new THREE.PerspectiveCamera(
       75,
       mountRef.current.clientWidth / mountRef.current.clientHeight,
       0.1,
       1000
     );
-    camera.position.z = 60;  // Slightly adjust the initial camera position for better fit
+    camera.position.z = 50;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(
@@ -38,15 +37,14 @@ const BrainNeuron = () => {
     const nodes: THREE.Mesh[] = [];
     const nodeGeometry = new THREE.SphereGeometry(0.7, 16, 16); // Larger spheres
 
-    // Adjust the number of nodes and their positions to ensure no cut-off
-    for (let i = 0; i < 1100; i++) {  // Increased to 1100 nodes for more density
+    for (let i = 0; i < 1100; i++) {  // Increased to 1000 nodes for more density
       const node = new THREE.Mesh(nodeGeometry, glowMaterial);
       node.position.x = (Math.random() - 0.5) * 80;   // Larger X size
       node.position.y = (Math.random() - 0.5) * 60;   // Larger Y size
       node.position.z = (Math.random() - 0.5) * 40;   // Larger Z size
 
       if (
-        node.position.x ** 2 / 1600 +
+        node.position.x ** 2 / 1600 +  // Increased divisors for more space
         node.position.y ** 2 / 900 +
         node.position.z ** 2 / 400 <=
         1
@@ -60,7 +58,7 @@ const BrainNeuron = () => {
     const materialLine = new THREE.LineBasicMaterial({
         color: '#9B111E', // Cranberry Red
         opacity: 0.3,
-        transparent: true,
+      transparent: true,
     });
 
     nodes.forEach((nodeA, i) => {
@@ -79,7 +77,7 @@ const BrainNeuron = () => {
 
     const animate = () => {
       requestAnimationFrame(animate);
-      scene.rotation.y += 0.005;  // Adjust rotation speed
+      scene.rotation.y += 0.005;
       renderer.render(scene, camera);
     };
     animate();
@@ -88,19 +86,10 @@ const BrainNeuron = () => {
       if (!mountRef.current) {
         return;
       }
-
-      // Update camera aspect ratio and projection matrix
-      const aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
-      camera.aspect = aspect;
+      // Adjust camera aspect ratio and update projection matrix
+      camera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
       camera.updateProjectionMatrix();
-
-      // Resize renderer
       renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
-
-      // Adjust camera field of view (FOV) dynamically to ensure the whole scene fits
-      const fovAdjustment = Math.min(mountRef.current.clientWidth, mountRef.current.clientHeight) / 200;
-      camera.fov = 75 + fovAdjustment;  // Modify FOV for a better fit
-      camera.updateProjectionMatrix();
     };
 
     window.addEventListener("resize", handleResize);

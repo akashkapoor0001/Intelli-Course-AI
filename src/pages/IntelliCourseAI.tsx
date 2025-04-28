@@ -92,29 +92,26 @@ const IntelliCourseAI = () => {
     <>
       <Header />
       <div
-        className="min-h-screen pt-20 px-4 sm:px-6 md:px-20 text-white relative overflow-x-hidden"
-        style={{
-          background: "linear-gradient(135deg, #000000, #0f0f0f, #1a1a1a)",
-        }}
+        className="min-h-screen pt-20 px-4 sm:px-6 md:px-20 text-white relative overflow-x-hidden bg-black"  // Added bg-black class here
       >
         <section className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-24 pt-10 md:pt-20 mb-20">
           {/* Left side (AI Image) */}
           <div className="w-full md:w-1/2 flex items-center justify-center mb-10 md:mb-0">
-          <BrainNeuron />
+            <BrainNeuron />
           </div>
-
+  
           {/* Right side (Text) */}
           <div className="w-full md:w-1/2 text-center md:text-left">
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight bg-gradient-to-t from-[#B22222] to-[#FF6347] bg-clip-text text-transparent mb-6 leading-tight">
               Welcome to IntelliCourse AI+
             </h1>
-
+  
             <p className="text-base sm:text-lg md:text-2xl text-gray-300 max-w-xl mx-auto md:mx-0">
               Powering your learning journey with AI-driven personalized roadmaps, skill analysis, career coaching, and more.
             </p>
           </div>
         </section>
-
+  
         <section className="space-y-20 md:space-y-24">
           {features.map((feature, index) => (
             <div
@@ -130,7 +127,7 @@ const IntelliCourseAI = () => {
                 </h2>
                 <p className="text-gray-300 text-base sm:text-lg">{feature.description}</p>
               </div>
-
+  
               <div className="w-full md:w-1/2 flex justify-center">
                 {/* Placeholder for future graphics or animations */}
                 <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-60 md:h-60 bg-gradient-to-r from-orange-600 to-blue-500 rounded-2xl shadow-lg"></div>
@@ -138,13 +135,13 @@ const IntelliCourseAI = () => {
             </div>
           ))}
         </section>
-
+  
         <footer className="mt-20 md:mt-32 text-center text-gray-500 text-xs sm:text-sm">
           © 2025 IntelliCourse. All rights reserved.
         </footer>
       </div>
     </>
-  );
+  );  
 };
 
 export default IntelliCourseAI;
