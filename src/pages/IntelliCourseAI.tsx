@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react";
 import aiGif from "@/assets/AILoading.gif";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import Roadmap from "@/assets/Roadmap.png"; 
+import RoadMap from "@/assets/RoadMap.png"; 
 import skillGapImg from "@/assets/skillGap.jpg"; 
 import aiCareerCoachImg from "@/assets/aiCareerCoach.jpg"; 
 import resumeBuilderImg from "@/assets/resumeBuilder.jpg"; 
@@ -19,7 +19,7 @@ const features = [
     title: "🎯 Personalized Learning Roadmaps",
     description:
       "Get a customized 3-6 month plan to reach your dream career faster with AI.",
-    image: Roadmap, // Path to image
+    image: RoadMap, // Path to image
   },
   {
     title: "📊 Skill Gap Analyzer",
