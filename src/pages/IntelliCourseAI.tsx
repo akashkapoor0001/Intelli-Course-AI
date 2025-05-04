@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react";
 import aiGif from "@/assets/AILoading.gif";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import RoadMap from "@/assets/RoadMap.png"; 
+import RoadMap from "@/assets/RoadMap.png";
 import resumeBuilderImg from "@/assets/ResumeBuilder.jpeg";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,19 +16,23 @@ const features = [
     title: "Personalized Learning Roadmaps",
     description:
       "Get a customized 3-6 month plan to reach your dream career faster with AI.",
-    image: RoadMap, // Path to image
+    image: RoadMap,
   },
   {
     title: "Smart Resume Builder",
     description:
       "Instantly generate a professional resume and LinkedIn summary.",
-    image: resumeBuilderImg, // Path to image
+    image: resumeBuilderImg,
   },
 ];
 
 const IntelliCourseAI = () => {
   const [loading, setLoading] = useState(true);
   const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // ✅ Move these refs inside the component
+  const brainRef = useRef<HTMLDivElement | null>(null);
+  const textRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -40,7 +44,8 @@ const IntelliCourseAI = () => {
   useEffect(() => {
     if (!loading) {
       const triggers: ScrollTrigger[] = [];
-  
+
+      // ✅ Animate the feature blocks
       featureRefs.current.forEach((el, index) => {
         if (el) {
           const animation = gsap.fromTo(
@@ -55,22 +60,54 @@ const IntelliCourseAI = () => {
               scrollTrigger: {
                 trigger: el,
                 start: "top 80%",
-                toggleActions: "play reverse play reverse", // play on scroll down, reverse on scroll up
+                toggleActions: "play reverse play reverse",
                 markers: false,
               },
             }
           );
-  
           triggers.push(animation.scrollTrigger!);
         }
       });
-  
+
+      // ✅ Animate BrainNeuron and text
+      if (brainRef.current && textRef.current) {
+        gsap.fromTo(
+          brainRef.current,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            scrollTrigger: {
+              trigger: brainRef.current,
+              start: "top 80%",
+              toggleActions: "play reverse play reverse",
+            },
+          }
+        );
+
+        gsap.fromTo(
+          textRef.current,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.2,
+            scrollTrigger: {
+              trigger: textRef.current,
+              start: "top 80%",
+              toggleActions: "play reverse play reverse",
+            },
+          }
+        );
+      }
+
       return () => {
         triggers.forEach((trigger) => trigger.kill());
       };
     }
   }, [loading]);
-  
 
   if (loading) {
     return (
@@ -94,12 +131,18 @@ const IntelliCourseAI = () => {
       <div className="min-h-screen pt-20 px-4 sm:px-6 md:px-20 text-white relative overflow-x-hidden bg-black">
         <section className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-24 pt-10 md:pt-20 mb-20">
           {/* Left side (AI Image) */}
-          <div className="w-full md:w-1/2 flex items-center justify-center mb-10 md:mb-0">
+          <div
+            className="w-full md:w-1/2 flex items-center justify-center mb-10 md:mb-0"
+            ref={brainRef}
+          >
             <BrainNeuron />
           </div>
 
           {/* Right side (Text) */}
-          <div className="w-full md:w-1/2 text-center md:text-left">
+          <div
+            className="w-full md:w-1/2 text-center md:text-left"
+            ref={textRef}
+          >
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight bg-gradient-to-t from-[#B22222] to-[#FF6347] bg-clip-text text-transparent mb-6 leading-tight">
               Welcome to IntelliCourse AI+
             </h1>
@@ -111,6 +154,7 @@ const IntelliCourseAI = () => {
           </div>
         </section>
 
+        {/* Feature Cards */}
         <section className="space-y-28 md:space-y-32 mt-20 md:mt-20">
           {features.map((feature, index) => (
             <div
@@ -120,22 +164,21 @@ const IntelliCourseAI = () => {
                 index % 2 !== 0 ? "md:flex-row-reverse" : ""
               }`}
             >
-<div className="w-full md:w-1/2 text-center md:text-left">
-  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent mb-5">
-    {feature.title}
-  </h2>
-  <p className="text-gray-300 text-base sm:text-lg leading-relaxed max-w-xs sm:max-w-sm md:max-w-sm break-words mx-auto md:mx-0 mb-4">
-  {feature.description}
-</p>
+              <div className="w-full md:w-1/2 text-center md:text-left">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent mb-5">
+                  {feature.title}
+                </h2>
+                <p className="text-gray-300 text-base sm:text-lg leading-relaxed max-w-xs sm:max-w-sm md:max-w-sm break-words mx-auto md:mx-0 mb-4">
+                  {feature.description}
+                </p>
 
-  <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300">
-    Access Feature
-  </button>
-</div>
-
+                {/* Button with white border and red hover */}
+                <button className="border-2 border-white hover:bg-red-600 hover:border-red-600 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300">
+                  Access Feature
+                </button>
+              </div>
 
               <div className="w-full md:w-1/2 flex justify-center">
-                {/* Replace the placeholder div with the image */}
                 <img
                   src={feature.image}
                   alt={feature.title}
