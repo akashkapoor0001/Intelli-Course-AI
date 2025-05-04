@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -22,6 +22,16 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
   const [typedText, setTypedText] = useState("");
   const [charIndex, setCharIndex] = useState(0);
 
+  // Ref to scroll to the roadmap section
+  const roadmapRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    // Scroll to the roadmap when it gets set
+    if (roadmapRef.current) {
+      roadmapRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [roadmap]);
+
   useEffect(() => {
     if (currentTaskIndex < flatTasks.length) {
       const currentTask = flatTasks[currentTaskIndex].task;
@@ -30,7 +40,7 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
         const timeout = setTimeout(() => {
           setTypedText((prev) => prev + currentTask[charIndex]);
           setCharIndex((prev) => prev + 1);
-        }, 5);
+        }, 10); // Adjust the typing speed here
         return () => clearTimeout(timeout);
       } else {
         const delay = setTimeout(() => {
@@ -53,7 +63,7 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
   };
 
   return (
-    <div className="py-10 px-4 max-w-7xl mx-auto overflow-hidden">
+    <div ref={roadmapRef} className="py-10 px-4 max-w-7xl mx-auto overflow-hidden">
       <div className="grid md:grid-cols-3 gap-x-12 gap-y-20 relative">
         {months.map(([month, tasks], monthIdx) => (
           <div key={month} className="relative">
