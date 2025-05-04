@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
+import { Link } from 'react-router-dom';
 import Header from "@/components/Header";
 import BrainNeuron from "@/components/BrainNeuron";
 import { Loader2 } from "lucide-react";
@@ -8,6 +9,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import RoadMap from "@/assets/RoadMap.png";
 import resumeBuilderImg from "@/assets/ResumeBuilder.jpeg";
+import { link } from "fs";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,12 +19,14 @@ const features = [
     description:
       "Get a customized 3-6 month plan to reach your dream career faster with AI.",
     image: RoadMap,
+    link: "/roadmap",
   },
   {
     title: "Smart Resume Builder",
     description:
       "Instantly generate a professional resume and LinkedIn summary.",
     image: resumeBuilderImg,
+    link: "/resume-builder",
   },
 ];
 
@@ -173,9 +177,9 @@ const IntelliCourseAI = () => {
                 </p>
 
                 {/* Button with white border and red hover */}
-                <button className="border-2 border-white hover:bg-red-600 hover:border-red-600 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300">
+                <Link to={feature.link} className="border-2 border-white hover:bg-red-600 hover:border-red-600 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300">
                   Access Feature
-                </button>
+                </Link>
               </div>
 
               <div className="w-full md:w-1/2 flex justify-center">

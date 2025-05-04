@@ -18,6 +18,7 @@ import LearningPlatform from "./pages/LearningPlatform";
 import AlumniEmployment from "./pages/AlumniEmployment";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import RoadmapPage from "./pages/RoadMap";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/roadmap" element={<RoadmapPage />} />
             </Routes>
           </BrowserRouter>
         </div>
