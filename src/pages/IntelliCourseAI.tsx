@@ -7,44 +7,23 @@ import aiGif from "@/assets/AILoading.gif";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import RoadMap from "@/assets/RoadMap.png"; 
-import resumeBuilderImg from "@/assets/ResumeBuilder.png";
-import skillGapImg from "@/assets/skillGap.jpg"; 
-import aiCareerCoachImg from "@/assets/aiCareerCoach.jpg"; 
-import industryInsightsImg from "@/assets/industryInsights.jpg";
+import resumeBuilderImg from "@/assets/ResumeBuilder.jpeg";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const features = [
   {
-    title: "🎯 Personalized Learning Roadmaps",
+    title: "Personalized Learning Roadmaps",
     description:
       "Get a customized 3-6 month plan to reach your dream career faster with AI.",
     image: RoadMap, // Path to image
   },
   {
-    title: "📄 Smart Resume Builder",
+    title: "Smart Resume Builder",
     description:
       "Instantly generate a professional resume and LinkedIn summary.",
     image: resumeBuilderImg, // Path to image
   },
-  // {
-  //   title: "📊 Skill Gap Analyzer",
-  //   description:
-  //     "Understand your skills vs industry demands and plan your next moves smartly.",
-  //   // image: skillGapImg, // Path to image
-  // },
-  // {
-  //   title: "🧑‍🏫 AI Career Coach",
-  //   description:
-  //     "Chat with AI to discover the best job opportunities based on your skills.",
-  //   // image: aiCareerCoachImg, // Path to image
-  // },
-  // {
-  //   title: "🌍 Dynamic Industry Insights",
-  //   description:
-  //     "Stay updated with trending skills, salaries, and companies hiring!",
-  //   // image: industryInsightsImg, // Path to image
-  // },
 ];
 
 const IntelliCourseAI = () => {
@@ -60,26 +39,38 @@ const IntelliCourseAI = () => {
 
   useEffect(() => {
     if (!loading) {
+      const triggers: ScrollTrigger[] = [];
+  
       featureRefs.current.forEach((el, index) => {
         if (el) {
-          gsap.fromTo(
+          const animation = gsap.fromTo(
             el,
             { opacity: 0, x: index % 2 === 0 ? -100 : 100 },
             {
               opacity: 1,
               x: 0,
-              duration: 1,
+              duration: 1.2,
+              ease: "power3.out",
+              overwrite: "auto",
               scrollTrigger: {
                 trigger: el,
                 start: "top 80%",
-                toggleActions: "play none none none",
+                toggleActions: "play reverse play reverse", // play on scroll down, reverse on scroll up
+                markers: false,
               },
             }
           );
+  
+          triggers.push(animation.scrollTrigger!);
         }
       });
+  
+      return () => {
+        triggers.forEach((trigger) => trigger.kill());
+      };
     }
   }, [loading]);
+  
 
   if (loading) {
     return (
@@ -129,14 +120,19 @@ const IntelliCourseAI = () => {
                 index % 2 !== 0 ? "md:flex-row-reverse" : ""
               }`}
             >
-              <div className="w-full md:w-1/2 text-center md:text-left">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent mb-5">
-                  {feature.title}
-                </h2>
-                <p className="text-gray-300 text-base sm:text-lg">
-                  {feature.description}
-                </p>
-              </div>
+<div className="w-full md:w-1/2 text-center md:text-left">
+  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent mb-5">
+    {feature.title}
+  </h2>
+  <p className="text-gray-300 text-base sm:text-lg leading-relaxed max-w-xs sm:max-w-sm md:max-w-sm break-words mx-auto md:mx-0 mb-4">
+  {feature.description}
+</p>
+
+  <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-full transition-all duration-300">
+    Access Feature
+  </button>
+</div>
+
 
               <div className="w-full md:w-1/2 flex justify-center">
                 {/* Replace the placeholder div with the image */}
