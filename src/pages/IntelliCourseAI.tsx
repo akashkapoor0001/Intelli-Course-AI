@@ -7,9 +7,9 @@ import aiGif from "@/assets/AILoading.gif";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import RoadMap from "@/assets/RoadMap.png"; 
+import resumeBuilderImg from "@/assets/ResumeBuilder.png";
 import skillGapImg from "@/assets/skillGap.jpg"; 
 import aiCareerCoachImg from "@/assets/aiCareerCoach.jpg"; 
-import resumeBuilderImg from "@/assets/resumeBuilder.jpg"; 
 import industryInsightsImg from "@/assets/industryInsights.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -22,29 +22,29 @@ const features = [
     image: RoadMap, // Path to image
   },
   {
-    title: "📊 Skill Gap Analyzer",
-    description:
-      "Understand your skills vs industry demands and plan your next moves smartly.",
-    // image: skillGapImg, // Path to image
-  },
-  {
-    title: "🧑‍🏫 AI Career Coach",
-    description:
-      "Chat with AI to discover the best job opportunities based on your skills.",
-    // image: aiCareerCoachImg, // Path to image
-  },
-  {
     title: "📄 Smart Resume Builder",
     description:
       "Instantly generate a professional resume and LinkedIn summary.",
-    // image: resumeBuilderImg, // Path to image
+    image: resumeBuilderImg, // Path to image
   },
-  {
-    title: "🌍 Dynamic Industry Insights",
-    description:
-      "Stay updated with trending skills, salaries, and companies hiring!",
-    // image: industryInsightsImg, // Path to image
-  },
+  // {
+  //   title: "📊 Skill Gap Analyzer",
+  //   description:
+  //     "Understand your skills vs industry demands and plan your next moves smartly.",
+  //   // image: skillGapImg, // Path to image
+  // },
+  // {
+  //   title: "🧑‍🏫 AI Career Coach",
+  //   description:
+  //     "Chat with AI to discover the best job opportunities based on your skills.",
+  //   // image: aiCareerCoachImg, // Path to image
+  // },
+  // {
+  //   title: "🌍 Dynamic Industry Insights",
+  //   description:
+  //     "Stay updated with trending skills, salaries, and companies hiring!",
+  //   // image: industryInsightsImg, // Path to image
+  // },
 ];
 
 const IntelliCourseAI = () => {
@@ -130,7 +130,7 @@ const IntelliCourseAI = () => {
               }`}
             >
               <div className="w-full md:w-1/2 text-center md:text-left">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-600 to-blue-500 bg-clip-text text-transparent mb-4">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent mb-5">
                   {feature.title}
                 </h2>
                 <p className="text-gray-300 text-base sm:text-lg">
@@ -143,7 +143,7 @@ const IntelliCourseAI = () => {
                 <img
                   src={feature.image}
                   alt={feature.title}
-                  className="w-52 h-52 mt-7 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-2xl shadow-2xl object-cover"
+                  className="w-60 h-60 mt-9 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-2xl shadow-2xl object-cover"
                 />
               </div>
             </div>
