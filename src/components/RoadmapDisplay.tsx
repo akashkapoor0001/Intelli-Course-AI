@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 interface Props {
   roadmap: {
@@ -62,8 +64,53 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
     return "pending";
   };
 
+  const generatePDF = async () => {
+    if (!roadmapRef.current) return;
+  
+    const input = roadmapRef.current;
+  
+    // Create canvas from HTML
+    const canvas = await html2canvas(input, {
+      scale: 2, // for higher resolution
+      useCORS: true,
+    });
+  
+    const imgData = canvas.toDataURL("image/png");
+  
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+  
+    const imgProps = pdf.getImageProperties(imgData);
+    const imgRatio = imgProps.width / imgProps.height;
+    const pdfRatio = pdfWidth / pdfHeight;
+  
+    let imgWidth = pdfWidth;
+    let imgHeight = pdfWidth / imgRatio;
+  
+    if (imgRatio < pdfRatio) {
+      imgHeight = pdfHeight;
+      imgWidth = pdfHeight * imgRatio;
+    }
+  
+    const x = (pdfWidth - imgWidth) / 2;
+    const y = 10;
+  
+    pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
+    pdf.save("roadmap.pdf");
+  };
+
   return (
     <div ref={roadmapRef} className="py-10 px-4 max-w-7xl mx-auto overflow-hidden">
+      <div className="mb-6 text-center">
+        <button
+          onClick={generatePDF}
+          className="bg-blue-500 text-white p-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+        >
+          Download PDF
+        </button>
+      </div>
+  
       <div className="grid md:grid-cols-3 gap-x-12 gap-y-20 relative">
         {months.map(([month, tasks], monthIdx) => (
           <div key={month} className="relative">
@@ -101,7 +148,9 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
                             <span className="animate-pulse">_</span>
                           </span>
                         )}
-                        {status === "pending" && <span className="text-gray-500">...</span>}
+                        {status === "pending" && (
+                          <span className="text-gray-500">...</span>
+                        )}
                       </p>
                     </div>
                   );
@@ -112,7 +161,7 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
         ))}
       </div>
     </div>
-  );
+  );  
 };
 
 export default RoadmapJourney;
