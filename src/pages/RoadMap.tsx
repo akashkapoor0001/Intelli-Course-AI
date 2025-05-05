@@ -75,18 +75,18 @@ const RoadmapGenerator = () => {
       <IntelliCourseAIHeader />
       <div className="min-h-screen bg-black text-white flex flex-col items-center px-4 py-10">
         <div className="flex flex-col lg:flex-row w-full max-w-7xl gap-10">
-          {/* Left Side GIF */}
-          <div className="flex-2 flex justify-center items-center mt-3 gap-4">
-            {/* Rotated Text */}
-            <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 text-5xl font-extrabold tracking-widest text-white rotate-[-90deg] whitespace-nowrap">
+          {/* Left Side GIF and Title */}
+          <div className="relative flex-2 flex justify-center items-center w-full lg:w-1/2 mt-3 gap-4">
+            {/* Rotated ROADMAP Text – Only visible on desktop */}
+            <div className="hidden lg:block absolute -left-40 top-1/2 -translate-y-1/2 text-5xl font-extrabold tracking-widest text-white rotate-[-90deg] whitespace-nowrap">
               ROADMAP
             </div>
 
-            {/* Image */}
+            {/* Image – Visible on all screens */}
             <img
-              src="/src/assets/RM.png"
+              src="/assets/RM.png" // ✅ Make sure this is in the public/assets folder
               alt="Roadmap Generator"
-              className="w-full max-w-[90%] sm:max-w-sm md:max-w-md h-auto object-contain rounded-lg"
+              className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto object-contain rounded-lg"
             />
           </div>
 
