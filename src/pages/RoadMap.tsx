@@ -84,9 +84,9 @@ const RoadmapGenerator = () => {
 
             {/* Image */}
             <img
-              src="\src\assets\RM.png"
+              src="/src/assets/RM.png"
               alt="Roadmap Generator"
-              className="w-full max-w-md h-auto object-contain rounded-lg"
+              className="w-full max-w-[90%] sm:max-w-sm md:max-w-md h-auto object-contain rounded-lg"
             />
           </div>
 
