@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { getLearningRoadmap } from "@/lib/geminiClient";
-import RoadmapDisplay from "@/components/RoadmapDisplay";
+import RoadmapJourney from "@/components/RoadmapDisplay";  // Corrected to RoadmapDisplay
 import {
   Card,
   CardContent,
@@ -29,9 +29,7 @@ const RoadmapGenerator = () => {
   const [goal, setGoal] = useState("");
   const [interests, setInterests] = useState("");
   const [loading, setLoading] = useState(false);
-  const [roadmap, setRoadmap] = useState<{ [month: string]: string[] } | null>(
-    null
-  );
+  const [roadmap, setRoadmap] = useState<{ [month: string]: string[] } | null>(null);
   const { toast } = useToast();
 
   const handleGenerate = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -183,7 +181,7 @@ const RoadmapGenerator = () => {
 
         {roadmap && (
           <div className="w-full max-w-4xl mt-10">
-            <RoadmapDisplay roadmap={roadmap} />
+            <RoadmapJourney roadmap={roadmap} />  {/* Replaced RoadmapDisplay with RoadmapJourney */}
           </div>
         )}
       </div>

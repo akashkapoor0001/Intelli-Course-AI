@@ -132,25 +132,39 @@ export const getLearningRoadmap = async (
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
 
   const prompt = `
-You are an expert AI career guide.
-
-Student Profile:
-- Degree: ${degree}
-- CGPA: ${cgpa}
-- Goal: ${goal}
-- Interests: ${interests}
-
-Create a personalized 3-month learning roadmap for the student.
-
-Each month should include a list of 3 specific and actionable learning goals or activities.
-
-Respond in **valid JSON object format only** like this:
-{
-  "Month 1": ["..."],
-  "Month 2": ["..."],
-  "Month 3": ["..."]
-}
-`;
+  You are an expert AI career guide.
+  
+  Student Profile:
+  - Degree: ${degree}
+  - CGPA: ${cgpa}
+  - Goal: ${goal}
+  - Interests: ${interests}
+  
+  Create a personalized 3-month learning roadmap for the student.
+  
+  Each month should include a list of 3 specific and actionable learning goals or activities.
+  
+  For each activity, provide:
+  1. A short description of the learning goal
+  2. The name of a **real online course** that fulfills that goal
+  3. A direct **link** to the course (from platforms like Coursera, edX, Udemy, or similar)
+  
+  Respond in **valid JSON object format only** like this:
+  {
+    "Month 1": [
+      {
+        "goal": "Learn the fundamentals of Machine Learning",
+        "course_name": "Machine Learning by Andrew Ng",
+        "course_link": "https://www.coursera.org/learn/machine-learning"
+      },
+      ...
+    ],
+    "Month 2": [ ... ],
+    "Month 3": [ ... ]
+  }
+  Ensure all course links are accessible and relevant.
+  `;
+  
 
   const result = await model.generateContent(prompt);
   const text = result.response.text();

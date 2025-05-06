@@ -4,9 +4,15 @@ import { motion } from "framer-motion";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
+interface RoadmapItem {
+  goal: string;
+  course_name: string;
+  course_link: string;
+}
+
 interface Props {
   roadmap: {
-    [month: string]: string[];
+    [month: string]: RoadmapItem[];
   };
 }
 
@@ -23,12 +29,9 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
   const [typedText, setTypedText] = useState("");
   const [charIndex, setCharIndex] = useState(0);
-
-  // Ref to scroll to the roadmap section
   const roadmapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Scroll to the roadmap when it gets set
     if (roadmapRef.current) {
       roadmapRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -36,13 +39,13 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
 
   useEffect(() => {
     if (currentTaskIndex < flatTasks.length) {
-      const currentTask = flatTasks[currentTaskIndex].task;
+      const currentTask = flatTasks[currentTaskIndex].task.goal;
 
       if (charIndex < currentTask.length) {
         const timeout = setTimeout(() => {
           setTypedText((prev) => prev + currentTask[charIndex]);
           setCharIndex((prev) => prev + 1);
-        }, 10); // Adjust the typing speed here
+        }, 10);
         return () => clearTimeout(timeout);
       } else {
         const delay = setTimeout(() => {
@@ -66,36 +69,31 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
 
   const generatePDF = async () => {
     if (!roadmapRef.current) return;
-  
     const input = roadmapRef.current;
-  
-    // Create canvas from HTML
     const canvas = await html2canvas(input, {
-      scale: 2, // for higher resolution
+      scale: 2,
       useCORS: true,
     });
-  
+
     const imgData = canvas.toDataURL("image/png");
-  
     const pdf = new jsPDF("p", "mm", "a4");
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = pdf.internal.pageSize.getHeight();
-  
     const imgProps = pdf.getImageProperties(imgData);
     const imgRatio = imgProps.width / imgProps.height;
     const pdfRatio = pdfWidth / pdfHeight;
-  
+
     let imgWidth = pdfWidth;
     let imgHeight = pdfWidth / imgRatio;
-  
+
     if (imgRatio < pdfRatio) {
       imgHeight = pdfHeight;
       imgWidth = pdfHeight * imgRatio;
     }
-  
+
     const x = (pdfWidth - imgWidth) / 2;
     const y = 10;
-  
+
     pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
     pdf.save("roadmap.pdf");
   };
@@ -110,7 +108,7 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
           Download PDF
         </button>
       </div>
-  
+
       <div className="grid md:grid-cols-3 gap-x-12 gap-y-20 relative">
         {months.map(([month, tasks], monthIdx) => (
           <div key={month} className="relative">
@@ -121,6 +119,7 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
                   const status = getTypedStatus(month, i);
                   const isCurrent = status === "typing";
                   const isDone = status === "completed";
+
                   return (
                     <div key={i} className="flex items-start gap-3">
                       <motion.div
@@ -140,18 +139,31 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
                       >
                         <MapPin className="text-white w-5 h-5" />
                       </motion.div>
-                      <p className="text-sm mt-1 text-gray-300">
-                        {isDone && <span>{task}</span>}
+
+                      <div className="text-sm mt-1 text-gray-300">
+                        {isDone && (
+                          <div>
+                            <p className="font-medium mb-1">{task.goal}</p>
+                            <a
+                              href={task.course_link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-400 hover:underline"
+                            >
+                              📘 {task.course_name}
+                            </a>
+                          </div>
+                        )}
                         {isCurrent && (
-                          <span className="text-green-400">
+                          <p className="text-green-400">
                             {typedText}
                             <span className="animate-pulse">_</span>
-                          </span>
+                          </p>
                         )}
                         {status === "pending" && (
-                          <span className="text-gray-500">...</span>
+                          <p className="text-gray-500">...</p>
                         )}
-                      </p>
+                      </div>
                     </div>
                   );
                 })}
@@ -161,7 +173,7 @@ const RoadmapJourney: React.FC<Props> = ({ roadmap }) => {
         ))}
       </div>
     </div>
-  );  
+  );
 };
 
 export default RoadmapJourney;
