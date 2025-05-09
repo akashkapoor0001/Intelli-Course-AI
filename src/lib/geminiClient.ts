@@ -69,7 +69,7 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI("AIzaSyC7YLdHtW7N3eLIN5IzXtgCCKHb_kSt7-4");
+const genAI = new GoogleGenerativeAI("AIzaSyDdoPvUWbuzfXpljglqzIbVB_AhH3-jjbA");
 
 // ---------------- Course Recommendations ----------------
 export const getCourseRecommendations = async (
@@ -77,7 +77,8 @@ export const getCourseRecommendations = async (
   degree: string,
   cgpa: string
 ) => {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" }); // lighter, faster, and better quota
+
 
   const prompt = `
 You are an AI course recommender.
@@ -129,7 +130,7 @@ export const getLearningRoadmap = async (
   goal: string,
   interests: string
 ) => {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" }); // lighter, faster, and better quota
 
   const prompt = `
   You are an expert AI career guide.
